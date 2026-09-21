@@ -66,6 +66,22 @@ export async function POST(request: Request) {
     )(parsed.data);
     return reply(result);
   } catch (error) {
+    if (error instanceof AIServiceError && error.code === "INPUT_TOO_LONG")
+      return reply(
+        {
+          error:
+            "Your local wingman works best with a short excerpt. Shorten the conversation or context and try again.",
+        },
+        413,
+      );
+    if (error instanceof AIServiceError && error.code === "LOCAL_UNAVAILABLE")
+      return reply(
+        {
+          error:
+            "Your local wingman couldn’t connect. Start Ollama on this computer and check that the model is downloaded. Your message is still here.",
+        },
+        503,
+      );
     if (error instanceof AIServiceError && error.code === "QUOTA_EXHAUSTED")
       return reply(
         {

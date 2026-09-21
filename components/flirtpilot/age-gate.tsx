@@ -10,9 +10,11 @@ import { setLocal } from "@/lib/local-store";
 export function AgeGate({
   open,
   onConfirm,
+  localAI = false,
 }: {
   open: boolean;
   onConfirm: () => void;
+  localAI?: boolean;
 }) {
   return (
     <Dialog open={open}>
@@ -42,8 +44,9 @@ export function AgeGate({
           Not for me — back to home
         </Link>
         <p className="privacy-note">
-          Your messages are sent to our AI provider only when you request
-          advice. Chats aren’t saved by this app.
+          {localAI
+            ? "Your messages are processed by a model on this computer. No cloud AI calls. Chats aren’t saved by this app."
+            : "Your messages are sent to our AI provider only when you request advice. Chats aren’t saved by this app."}
         </p>
       </DialogContent>
     </Dialog>

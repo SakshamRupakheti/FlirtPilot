@@ -8,10 +8,11 @@ A context-aware AI texting wingman for adults. This first implementation focuses
 
 1. Install Node.js 22.13 or newer.
 2. Run `npm ci`.
-3. Copy `.env.example` to `.env.local` and set your OpenAI `AI_API_KEY`.
-4. Run `npm run dev` and open http://localhost:5173.
+3. Install [Ollama](https://ollama.com/download), then run `ollama pull qwen3:4b-instruct-2507-q4_K_M`. For the portable Windows setup used here, see [DEVELOPMENT.md](DEVELOPMENT.md).
+4. Copy `.env.example` to `.env.local`. The default selects local Ollama; no API key is required.
+5. Keep Ollama running, run `npm run dev` and open http://localhost:5173.
 
-The API key stays on the server. There are no accounts, subscriptions or payments. Without a configured key, requests show a clear setup error rather than simulated AI output.
+Local mode runs a downloaded model on your computer with no per-request API fees. It needs available RAM/GPU resources and electricity. There is no automatic cloud fallback. OpenAI remains optional by explicitly setting `AI_PROVIDER=openai` and configuring server-only credentials. There are no accounts, subscriptions or payments.
 
 ## What is implemented
 
@@ -21,7 +22,7 @@ The API key stays on the server. There are no accounts, subscriptions or payment
 - Nuanced interpretation, evidence and a short strategy
 - Exactly three editable Safe / Bold / Risky replies
 - Copy, feedback-conditioned regeneration and vibe controls
-- Strict OpenAI structured outputs plus Zod validation
+- Ollama JSON Schema output or optional OpenAI structured output, plus Zod validation
 - Local-only preferences/anonymous feedback, with a clear-data action
 - CI for lint, strict TypeScript, contract tests and production build
 
@@ -36,4 +37,4 @@ npm run build
 
 Built with TypeScript, React, Next.js App Router APIs, Tailwind and shadcn/Radix. Vinext provides the Vite/Cloudflare Worker deployment runtime. GitHub Pages alone cannot execute the server AI endpoint.
 
-See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture, environment settings, privacy decisions, validation limits and the remaining MVP phases. Real OpenAI output and deployment still require server secrets and live validation; the full MVP is not yet complete.
+See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture, environment settings, privacy decisions, validation limits and the remaining MVP phases. Local mode is for this computer; a publicly hosted site cannot automatically use your laptop's model. The full MVP is not yet complete.

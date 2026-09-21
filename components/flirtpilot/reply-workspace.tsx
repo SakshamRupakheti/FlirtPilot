@@ -51,7 +51,7 @@ const statuses = [
   "Cooking replies…",
   "Measuring the risk…",
 ];
-export function ReplyWorkspace() {
+export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
   const [ready, setReady] = useState(false),
     [adult, setAdult] = useState(false),
     [message, setMessage] = useState(""),
@@ -100,7 +100,10 @@ export function ReplyWorkspace() {
     if (event) feedback.current = [...feedback.current, event].slice(-8);
     const controller = new AbortController();
     abort.current = controller;
-    const timeout = setTimeout(() => controller.abort(), 55000);
+    const timeout = setTimeout(
+      () => controller.abort(),
+      localAI ? 190000 : 55000,
+    );
     try {
       const response = await fetch("/api/reply", {
         method: "POST",
@@ -176,7 +179,11 @@ export function ReplyWorkspace() {
   return (
     <AppShell>
       <Toaster theme="dark" />
-      <AgeGate open={ready && !adult} onConfirm={() => setAdult(true)} />
+      <AgeGate
+        localAI={localAI}
+        open={ready && !adult}
+        onConfirm={() => setAdult(true)}
+      />
       <main className="workspace">
         <Link className="back-link" href="/">
           <ArrowLeft size={14} /> Back to your wingman
@@ -532,11 +539,12 @@ export function ReplyWorkspace() {
           <details>
             <summary>Privacy, in plain words</summary>
             <p>
-              Messages and context go to OpenAI to provide your requested
-              advice. FlirtPilot doesn’t save chats or use them for training.
-              OpenAI may retain abuse-monitoring logs under its API policy. Age
-              confirmation, vibe preferences and feedback counts stay in this
-              browser. Feedback contains no message text and is never uploaded.
+              {localAI
+                ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
+                : "Messages and context go to OpenAI to provide your requested advice. FlirtPilot doesn’t save chats or use them for training. OpenAI may retain abuse-monitoring logs under its API policy. "}
+              Age confirmation, vibe preferences and feedback counts stay in
+              this browser. Feedback contains no message text and is never
+              uploaded.
             </p>
             <button
               className="text-button"

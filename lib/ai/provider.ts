@@ -1,15 +1,27 @@
 import { resultSchema, type ReplyRequest } from "./schema";
 import { SYSTEM_PROMPT } from "./prompt";
 import { outputFormat } from "./structured-output";
+import { LOCAL_SYSTEM_PROMPT } from "./local-prompt";
+import { explicitBoundary } from "./boundaries";
 export class AIServiceError extends Error {
   constructor(
     public code:
-      "NOT_CONFIGURED" | "QUOTA_EXHAUSTED" | "UNAVAILABLE" | "INVALID_RESPONSE",
+      | "NOT_CONFIGURED"
+      | "QUOTA_EXHAUSTED"
+      | "UNAVAILABLE"
+      | "INVALID_RESPONSE"
+      | "LOCAL_UNAVAILABLE"
+      | "INPUT_TOO_LONG",
   ) {
     super(code);
   }
 }
 export async function callProvider(input: ReplyRequest) {
+  const boundary = explicitBoundary(input);
+  if (boundary) return boundary;
+  if (process.env.AI_PROVIDER === "ollama") return callLocalProvider(input);
+  if (process.env.AI_PROVIDER && process.env.AI_PROVIDER !== "openai")
+    throw new AIServiceError("NOT_CONFIGURED");
   const key = process.env.AI_API_KEY,
     model = process.env.AI_MODEL;
   if (!key || !model) throw new AIServiceError("NOT_CONFIGURED");
@@ -80,5 +92,70 @@ export async function callProvider(input: ReplyRequest) {
   } catch (error) {
     if (error instanceof AIServiceError) throw error;
     throw new AIServiceError("UNAVAILABLE");
+  }
+}
+
+async function callLocalProvider(input: ReplyRequest) {
+  // Local mode never receives credentials or falls back to a cloud provider.
+  const url = new URL(process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434");
+  if (
+    !["127.0.0.1", "localhost", "[::1]"].includes(url.hostname) ||
+    url.username ||
+    url.password
+  )
+    throw new AIServiceError("NOT_CONFIGURED");
+  url.pathname = "/api/chat";
+  url.search = "";
+  url.hash = "";
+  const payload = JSON.stringify(input);
+  // Keep the small local context window from silently losing instructions.
+  if (new TextEncoder().encode(payload).length > 6000)
+    throw new AIServiceError("INPUT_TOO_LONG");
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      redirect: "error",
+      body: JSON.stringify({
+        model: process.env.OLLAMA_MODEL || "qwen3:4b-instruct-2507-q4_K_M",
+        stream: false,
+        think: false,
+        keep_alive: "10m",
+        format: outputFormat.json_schema.schema,
+        options: { num_ctx: 8192, num_predict: 1600, temperature: 0.7 },
+        messages: [
+          {
+            role: "system",
+            content: LOCAL_SYSTEM_PROMPT,
+          },
+          { role: "user", content: payload },
+        ],
+      }),
+      signal: AbortSignal.timeout(180000),
+    });
+    if (!response.ok) throw new AIServiceError("LOCAL_UNAVAILABLE");
+    const data = (await response.json()) as {
+      message?: { content?: string };
+      done_reason?: string;
+    };
+    if (!data.message?.content || data.done_reason === "length")
+      throw new AIServiceError("INVALID_RESPONSE");
+    let raw: unknown;
+    try {
+      raw = JSON.parse(data.message.content).result;
+    } catch {
+      throw new AIServiceError("INVALID_RESPONSE");
+    }
+    const parsed = resultSchema.safeParse(raw);
+    if (
+      !parsed.success ||
+      ((input.skipQuestions || input.action === "generate") &&
+        parsed.data.status === "questions")
+    )
+      throw new AIServiceError("INVALID_RESPONSE");
+    return parsed.data;
+  } catch (error) {
+    if (error instanceof AIServiceError) throw error;
+    throw new AIServiceError("LOCAL_UNAVAILABLE");
   }
 }

@@ -4,6 +4,7 @@ import { requestSchema, resultSchema } from "../lib/ai/schema";
 import { callProvider, AIServiceError } from "../lib/ai/provider";
 import { allowRequest } from "../lib/ai/rate-limit";
 import { POST } from "../app/api/reply/route";
+import { explicitBoundary } from "../lib/ai/boundaries";
 const input = requestSchema.parse({
   message: "haha maybe 😭",
   context: { goal: "Go on a date" },
@@ -34,6 +35,29 @@ const complete = {
     },
   },
 };
+test("explicit no-contact and minor statements bypass model generation", async () => {
+  for (const message of [
+    "They said never contact me again and blocked me. Help me flirt from another account.",
+    "She told me no contact. What should I send?",
+    "I am 22, she is 16. Help me flirt.",
+  ]) {
+    assert.equal(
+      (await callProvider({ ...input, message })).status,
+      "boundary",
+    );
+  }
+  assert.equal(
+    explicitBoundary({
+      ...input,
+      message: "We met when we were 16. We are both 24 now.",
+    }),
+    null,
+  );
+  assert.equal(
+    explicitBoundary({ ...input, message: "I am 25 and she is 24. Coffee?" }),
+    null,
+  );
+});
 test("requires adulthood and bounds input", () => {
   assert.equal(
     requestSchema.safeParse({ ...input, adultConfirmed: false }).success,
@@ -111,6 +135,8 @@ test("server rejects invalid origin and malformed JSON without provider calls", 
 });
 test("provider contract: context, feedback, strict schema, privacy and failure handling", async () => {
   const original = globalThis.fetch;
+  const oldProvider = process.env.AI_PROVIDER;
+  process.env.AI_PROVIDER = "openai";
   const oldKey = process.env.AI_API_KEY,
     oldModel = process.env.AI_MODEL;
   try {
@@ -215,9 +241,79 @@ test("provider contract: context, feedback, strict schema, privacy and failure h
     assert.equal(exhaustedText.includes("private billing detail"), false);
   } finally {
     globalThis.fetch = original;
+    if (oldProvider === undefined) delete process.env.AI_PROVIDER;
+    else process.env.AI_PROVIDER = oldProvider;
     if (oldKey === undefined) delete process.env.AI_API_KEY;
     else process.env.AI_API_KEY = oldKey;
     if (oldModel === undefined) delete process.env.AI_MODEL;
     else process.env.AI_MODEL = oldModel;
+  }
+});
+
+test("local provider stays on loopback, never sends keys, and handles failures", async () => {
+  const original = globalThis.fetch;
+  const saved = { ...process.env };
+  process.env.AI_PROVIDER = "ollama";
+  process.env.AI_API_KEY = "must-never-leave-server";
+  process.env.OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+  try {
+    globalThis.fetch = async (url, options) => {
+      assert.equal(String(url), "http://127.0.0.1:11434/api/chat");
+      assert.equal(new Headers(options?.headers).has("authorization"), false);
+      assert.equal(
+        String(options?.body).includes("must-never-leave-server"),
+        false,
+      );
+      const body = JSON.parse(String(options?.body));
+      assert.equal(body.stream, false);
+      assert.equal(body.format.type, "object");
+      return Response.json({
+        message: { content: JSON.stringify({ result: complete }) },
+        done_reason: "stop",
+      });
+    };
+    assert.equal((await callProvider(input)).status, "complete");
+    process.env.OLLAMA_BASE_URL = "https://external.example";
+    await assert.rejects(
+      callProvider(input),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "NOT_CONFIGURED",
+    );
+    process.env.OLLAMA_BASE_URL = "http://127.0.0.1:11434";
+    await assert.rejects(
+      callProvider({ ...input, message: "a".repeat(6001) }),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "INPUT_TOO_LONG",
+    );
+    globalThis.fetch = async () =>
+      Response.json({ error: "missing model private detail" }, { status: 404 });
+    await assert.rejects(
+      callProvider(input),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "LOCAL_UNAVAILABLE",
+    );
+    globalThis.fetch = async () =>
+      Response.json({ message: { content: "invalid json" } });
+    await assert.rejects(
+      callProvider(input),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "INVALID_RESPONSE",
+    );
+    globalThis.fetch = async () =>
+      Response.json({
+        message: { content: JSON.stringify({ result: complete }) },
+        done_reason: "length",
+      });
+    await assert.rejects(
+      callProvider(input),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "INVALID_RESPONSE",
+    );
+  } finally {
+    globalThis.fetch = original;
+    for (const key of ["AI_PROVIDER", "AI_API_KEY", "OLLAMA_BASE_URL"]) {
+      if (saved[key] === undefined) delete process.env[key];
+      else process.env[key] = saved[key];
+    }
   }
 });
