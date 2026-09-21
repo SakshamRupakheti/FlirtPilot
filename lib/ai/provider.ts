@@ -115,7 +115,9 @@ async function callLocalProvider(input: ReplyRequest) {
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      redirect: "error",
+      // workerd supports manual/follow, but not the Fetch "error" mode.
+      // Reject 3xx below without following them outside the local machine.
+      redirect: "manual",
       body: JSON.stringify({
         model: process.env.OLLAMA_MODEL || "qwen3:4b-instruct-2507-q4_K_M",
         stream: false,

@@ -259,6 +259,7 @@ test("local provider stays on loopback, never sends keys, and handles failures",
   try {
     globalThis.fetch = async (url, options) => {
       assert.equal(String(url), "http://127.0.0.1:11434/api/chat");
+      assert.equal(options?.redirect, "manual");
       assert.equal(new Headers(options?.headers).has("authorization"), false);
       assert.equal(
         String(options?.body).includes("must-never-leave-server"),
@@ -273,6 +274,16 @@ test("local provider stays on loopback, never sends keys, and handles failures",
       });
     };
     assert.equal((await callProvider(input)).status, "complete");
+    globalThis.fetch = async () =>
+      new Response(null, {
+        status: 302,
+        headers: { Location: "https://external.example" },
+      });
+    await assert.rejects(
+      callProvider(input),
+      (e: unknown) =>
+        e instanceof AIServiceError && e.code === "LOCAL_UNAVAILABLE",
+    );
     process.env.OLLAMA_BASE_URL = "https://external.example";
     await assert.rejects(
       callProvider(input),
