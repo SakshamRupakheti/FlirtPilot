@@ -20,3 +20,6 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npm run build:vercel
+      - name: Validate offline keyboard core and Swift syntax (no app deployment)
+        run: |
+          docker run --rm -v "$PWD/ios:/src" -w /src swift:6.0-jammy sh -c 'swift test --package-path PilotCore && swiftc -frontend -parse App/FlirtPilotApp.swift Keyboard/KeyboardViewController.swift Keyboard/WordSuggestions.swift PilotCore/Sources/PilotCore/OfflineEditor.swift'
