@@ -2,6 +2,22 @@
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
 
+.creator-watermark {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: rgb(15 10 14 / 85%);
+  color: #bdaeb8;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
 @utility scrollbar-thin {
   scrollbar-width: thin;
 }
