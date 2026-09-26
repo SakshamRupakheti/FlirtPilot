@@ -47,7 +47,7 @@ export function AgeGate({
         </Link>
         <p className="privacy-note">
           {previewOnly
-            ? "This preview does not send your text to an AI service."
+            ? "Connect your laptop to use free local AI. Messages travel through an encrypted Cloudflare tunnel when you request advice."
             : localAI
               ? "Your messages are processed by a model on this computer. No cloud AI calls. Chats aren’t saved by this app."
               : "Your messages are sent to our AI provider only when you request advice. Chats aren’t saved by this app."}
