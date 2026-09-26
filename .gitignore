@@ -50,3 +50,6 @@ next-env.d.ts
 /ios/Generated/
 /ios/*.xcodeproj/
 /ios/DerivedData/
+/ios/PilotCore/.build/
+/ios/PilotCore/.swiftpm/
+/ios/PilotArtifacts/

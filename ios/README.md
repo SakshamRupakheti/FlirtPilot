@@ -1,4 +1,10 @@
-# FlirtPilot for iPhone — development preview
+# FlirtPilot for iPhone — private offline pilot
+
+**Current branch: `codex/keyboard-offline-pilot`. Do not deploy this branch.** The current native target is an offline pilot: dictionary word suggestions, a few next-word continuations, optional spacing/apostrophe cleanup, guarded insertion, Undo, and an in-app pilot checklist. It does not contain an LLM, call a network service, require Full Access, request App Groups/Keychain entitlements, or depend on laptop Ollama. `KeyboardAPI.swift` and `Shared/Settings.swift` remain archived source and are excluded from both pilot targets. `RequestsOpenAccess` is false.
+
+See [PILOT.md](PILOT.md) for current build/install/testing instructions and limitations. The notes below describe the earlier network-enabled development preview, **not the current pilot target**. No signed IPA, simulator verification or iPhone installation has been completed yet.
+
+## Archived network-enabled preview notes
 
 This is native iOS source for an iOS 16+ companion app and custom keyboard, including iPhone 14. It is **not yet a signed/installable app**. Development was performed on Windows; Swift compilation, simulator layout and device testing are pending. The existing web UI is preserved.
 

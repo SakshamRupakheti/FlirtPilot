@@ -86,6 +86,8 @@ No accounts, pricing, subscriptions, social integrations or training pipeline ar
 
 ## Vercel mobile preview
 
+**Latest user direction:** stop the laptop-tunnel approach and prepare a private native iPhone keyboard pilot before any further deployment. Work is isolated on `codex/keyboard-offline-pilot`, where Git-triggered Vercel deployment is disabled. Do not activate the pending tunnel or deploy changes without renewed user direction. See `ios/PILOT.md`. The offline pilot is basic editing/word suggestions, not full conversation AI; signed-device testing remains outstanding.
+
 The user selected Vercel for mobile testing. `vercel.json` builds this same app with native Next.js (`npm run build:vercel`); the existing Vinext local workflow remains available. Vercel project `flirt-pilot` tracks `codex/vercel-deployment` for production, since `main` currently contains only the original README. Root Directory is `./`. Do not upload `.env.local` or the keyboard access token.
 
 On Vercel, users can pair their own laptop using the connection panel. Without pairing or explicitly configured server-side cloud inference, generation remains disabled. The hosted keyboard endpoint is disabled. This website does not install the native iPhone keyboard.

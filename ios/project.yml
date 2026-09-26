@@ -7,33 +7,30 @@ settings:
   base:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "1"
-    MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "0.2.0"
+    CURRENT_PROJECT_VERSION: "2"
     CODE_SIGN_STYLE: Automatic
 targets:
   FlirtPilot:
     type: application
     platform: iOS
-    sources: [App, Shared]
+    sources: [App]
     dependencies:
       - target: FlirtPilotKeyboard
         embed: true
     info:
       path: Generated/App-Info.plist
       properties:
-        CFBundleDisplayName: FlirtPilot
+        CFBundleDisplayName: FlirtPilot Pilot
         UILaunchScreen: {}
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
-        SharedKeychainGroup: $(AppIdentifierPrefix)com.flirtpilot.shared
-    entitlements:
-      path: Generated/App.entitlements
-      properties:
-        com.apple.security.application-groups: [group.com.flirtpilot.shared]
-        keychain-access-groups: [$(AppIdentifierPrefix)com.flirtpilot.shared]
   FlirtPilotKeyboard:
     type: app-extension
     platform: iOS
-    sources: [Keyboard, Shared]
+    sources:
+      - path: Keyboard
+        excludes: [KeyboardAPI.swift]
+      - path: PilotCore/Sources/PilotCore
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.flirtpilot.FlirtPilot.keyboard
@@ -42,20 +39,14 @@ targets:
     info:
       path: Generated/Keyboard-Info.plist
       properties:
-        CFBundleDisplayName: FlirtPilot
-        SharedKeychainGroup: $(AppIdentifierPrefix)com.flirtpilot.shared
+        CFBundleDisplayName: FlirtPilot Pilot
         NSExtension:
           NSExtensionPointIdentifier: com.apple.keyboard-service
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).KeyboardViewController
           NSExtensionAttributes:
             IsASCIICapable: true
             PrimaryLanguage: en-US
-            RequestsOpenAccess: true
-    entitlements:
-      path: Generated/Keyboard.entitlements
-      properties:
-        com.apple.security.application-groups: [group.com.flirtpilot.shared]
-        keychain-access-groups: [$(AppIdentifierPrefix)com.flirtpilot.shared]
+            RequestsOpenAccess: false
 schemes:
   FlirtPilot:
     build:
