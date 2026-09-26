@@ -28,6 +28,8 @@ Local mode runs a downloaded model on your computer with no per-request API fees
 
 ## Development
 
+The optional [iPhone keyboard development preview](ios/README.md) adds local word suggestions and a shorter authenticated AI endpoint. It is native source, not yet a signed/installable iPhone app. Building it requires macOS/Xcode or a configured macOS build service; the Windows web workflow below remains unchanged.
+
 ```sh
 npm run lint
 npm run typecheck
