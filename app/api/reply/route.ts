@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return reply(
       {
         error:
-          "This hosted preview is ready to explore, but online AI is not connected yet. The local version still uses your laptop's model.",
+          "Your wingman is waiting for its hosted AI connection. The app owner needs to finish server setup. No laptop connection is needed.",
       },
       503,
     );
@@ -76,6 +76,14 @@ export async function POST(request: Request) {
     )(parsed.data);
     return reply(result);
   } catch (error) {
+    if (error instanceof AIServiceError && error.code === "FREE_LIMIT_REACHED")
+      return reply(
+        {
+          error:
+            "Our free AI allowance is resting. Try again later; your message is still here.",
+        },
+        429,
+      );
     if (error instanceof AIServiceError && error.code === "INPUT_TOO_LONG")
       return reply(
         {

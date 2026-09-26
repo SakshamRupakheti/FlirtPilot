@@ -86,6 +86,14 @@ No accounts, pricing, subscriptions, social integrations or training pipeline ar
 
 ## Vercel mobile preview
 
+### Hosted AI migration (website first)
+
+The latest website direction replaces laptop pairing with a server-side Groq connection. Set `AI_PROVIDER=groq`, secret `GROQ_API_KEY`, and optional `GROQ_MODEL=openai/gpt-oss-20b` in Vercel Production, then redeploy. Do not prefix the key with `NEXT_PUBLIC_`; do not reuse the exposed old OpenAI key. Stay on Groq's Free plan. Requests use strict JSON with Zod validation, a bounded completion budget, and a friendly 429 when the provider allowance is reached. There is no paid-provider fallback.
+
+The Reply page no longer asks end users for a tunnel URL or device code. It remains explicitly unavailable until hosted credentials exist. Privacy copy names the selected provider. Groq receives conversation context when a user requests advice; provider data/abuse-monitoring policies still apply. Do not promise zero retention without checking the account's Data Controls. The dormant relay scripts are retained for history, not started or linked from the current UI. `MODEL_DATA_PLAN.md` describes the future keyboard and consented evaluation approach; no training collection is enabled.
+
+Validation: mocked provider contract tests cover separate credentials, no OpenAI-key fallback, output schema, redirect refusal and free-limit handling. Live Groq quality/latency testing remains pending a user-configured key.
+
 The user selected Vercel for mobile testing. `vercel.json` builds this same app with native Next.js (`npm run build:vercel`); the existing Vinext local workflow remains available. Vercel project `flirt-pilot` tracks `codex/vercel-deployment` for production, since `main` currently contains only the original README. Root Directory is `./`. Do not upload `.env.local` or the keyboard access token.
 
 On Vercel, users can pair their own laptop using the connection panel. Without pairing or explicitly configured server-side cloud inference, generation remains disabled. The hosted keyboard endpoint is disabled. This website does not install the native iPhone keyboard.
@@ -99,3 +107,4 @@ The connection panel accepts only HTTPS `*.trycloudflare.com` origins without cr
 After explicitly approving Cloudflare as the network intermediary, download official `cloudflared-windows-amd64.exe` to ignored `work/cloudflared.exe`, then run `powershell -File scripts/start-phone-ai.ps1`. The script writes pairing details to ignored `work/phone-connection.txt`. Keep the laptop awake. Temporary tunnel addresses change after restart and have no uptime guarantee. Stop the tunnel/bridge with `powershell -File scripts/stop-phone-ai.ps1`; this leaves local Ollama running. Delete `work/relay-token.txt` while the bridge is stopped to rotate the connection code. No payment, router port forwarding, cloud API key or Windows startup service is required.
 
 Status: authenticated bridge tests and production build pass. Starting the public tunnel was blocked by automatic approval review pending explicit consent for conversation text and authorization traffic passing through Cloudflare. Do not represent external phone inference as verified until the tunnel is authorized and tested.
+`Groq` is accepted as a server-only alias for `GROQ_API_KEY` to support the existing write-only Vercel secret. The standard name takes precedence.

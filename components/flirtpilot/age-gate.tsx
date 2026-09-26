@@ -12,11 +12,13 @@ export function AgeGate({
   onConfirm,
   localAI = false,
   previewOnly = false,
+  providerName = "OpenAI",
 }: {
   open: boolean;
   onConfirm: () => void;
   localAI?: boolean;
   previewOnly?: boolean;
+  providerName?: "Groq" | "OpenAI";
 }) {
   return (
     <Dialog open={open}>
@@ -47,10 +49,10 @@ export function AgeGate({
         </Link>
         <p className="privacy-note">
           {previewOnly
-            ? "Connect your laptop to use free local AI. Messages travel through an encrypted Cloudflare tunnel when you request advice."
+            ? "Hosted AI setup is pending. No messages are sent to an AI service yet."
             : localAI
               ? "Your messages are processed by a model on this computer. No cloud AI calls. Chats aren’t saved by this app."
-              : "Your messages are sent to our AI provider only when you request advice. Chats aren’t saved by this app."}
+              : `Your messages are sent to ${providerName} only when you request advice. Chats aren’t saved by this app.`}
         </p>
       </DialogContent>
     </Dialog>

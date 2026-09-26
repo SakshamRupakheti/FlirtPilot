@@ -21,8 +21,6 @@ import {
 } from "@/components/ui/select";
 import { AppShell } from "./shell";
 import { AgeGate } from "./age-gate";
-import { LaptopConnector } from "./laptop-connection";
-import type { LaptopConnection } from "@/lib/relay-address";
 import { ContextQuestionnaire } from "./context-questionnaire";
 import { ReplyDeck } from "./reply-deck";
 import {
@@ -56,12 +54,13 @@ const statuses = [
 export function ReplyWorkspace({
   localAI = false,
   previewOnly = false,
+  providerName = "OpenAI",
 }: {
   localAI?: boolean;
   previewOnly?: boolean;
+  providerName?: "Groq" | "OpenAI";
 }) {
-  const [laptop, setLaptop] = useState<LaptopConnection | null>(null);
-  const unavailable = previewOnly && !laptop;
+  const unavailable = previewOnly;
   const [ready, setReady] = useState(false),
     [adult, setAdult] = useState(false),
     [message, setMessage] = useState(""),
@@ -112,36 +111,32 @@ export function ReplyWorkspace({
     abort.current = controller;
     const timeout = setTimeout(
       () => controller.abort(),
-      localAI || laptop ? 190000 : 55000,
+      localAI ? 190000 : 55000,
     );
     try {
-      const response = await fetch(
-        laptop ? laptop.url + "/api/reply" : "/api/reply",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(laptop ? { Authorization: `Bearer ${laptop.token}` } : {}),
-          },
-          credentials: "omit",
-          redirect: "error",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify({
-            message,
-            context,
-            adultConfirmed: adult,
-            skipQuestions: skip,
-            action: regenerate || skip ? "generate" : "analyze",
-            vibe,
-            feedback: feedback.current,
-            previousReplies:
-              regenerate && result?.status === "complete"
-                ? Object.values(result.replies).map((r) => r.text)
-                : [],
-          }),
-          signal: controller.signal,
+      const response = await fetch("/api/reply", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        credentials: "omit",
+        redirect: "error",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify({
+          message,
+          context,
+          adultConfirmed: adult,
+          skipQuestions: skip,
+          action: regenerate || skip ? "generate" : "analyze",
+          vibe,
+          feedback: feedback.current,
+          previousReplies:
+            regenerate && result?.status === "complete"
+              ? Object.values(result.replies).map((r) => r.text)
+              : [],
+        }),
+        signal: controller.signal,
+      });
       const json: unknown = await response.json();
       if (!response.ok)
         throw new Error(
@@ -176,11 +171,9 @@ export function ReplyWorkspace({
       setError(
         controller.signal.aborted
           ? "That took a little too long. Your message is still here—try again."
-          : laptop && e instanceof TypeError
-            ? "Couldn’t reach your laptop. Keep it awake with Ollama and the tunnel running, then try again. Your message is still here."
-            : e instanceof Error
-              ? e.message
-              : "My wingman brain froze for a second. Try again.",
+          : e instanceof Error
+            ? e.message
+            : "My wingman brain froze for a second. Try again.",
       );
     } finally {
       clearTimeout(timeout);
@@ -203,6 +196,7 @@ export function ReplyWorkspace({
       <AgeGate
         localAI={localAI}
         previewOnly={previewOnly}
+        providerName={providerName}
         open={ready && !adult}
         onConfirm={() => setAdult(true)}
       />
@@ -225,11 +219,13 @@ export function ReplyWorkspace({
           </span>
         </div>
         {previewOnly && (
-          <LaptopConnector
-            connection={laptop}
-            onChange={setLaptop}
-            disabled={busy}
-          />
+          <p
+            role="status"
+            className="mb-6 rounded-2xl border border-pink-400/30 bg-pink-500/10 p-5 text-sm text-pink-100"
+          >
+            Your wingman is getting connected. Hosted AI setup is not finished
+            yet. You won’t need a laptop or a connection code to use it.
+          </p>
         )}
         <div className="progress-steps" aria-label="Reply progress">
           {["The message", "The context", "Your next move"].map((label, i) => (
@@ -568,13 +564,11 @@ export function ReplyWorkspace({
           <details>
             <summary>Privacy, in plain words</summary>
             <p>
-              {laptop
-                ? "Messages are sent through Cloudflare’s HTTPS tunnel to your paired laptop for local Ollama processing. Cloudflare handles the network traffic; no cloud AI provider is used. The connection code stays only in this tab’s memory. "
-                : previewOnly
-                  ? "This preview does not send your text to an AI service. Text you enter stays in this page until you leave or reset it. "
-                  : localAI
-                    ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
-                    : "Messages and context go to OpenAI to provide your requested advice. FlirtPilot doesn’t save chats or use them for training. OpenAI may retain abuse-monitoring logs under its API policy. "}
+              {previewOnly
+                ? "This preview does not send your text to an AI service. Text you enter stays in this page until you leave or reset it. "
+                : localAI
+                  ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
+                  : `Messages and context go to ${providerName} only when you request advice. FlirtPilot doesn’t save chats or use them for training. The provider’s retention and abuse-monitoring policies apply. `}
               Age confirmation, vibe preferences and feedback counts stay in
               this browser. Feedback contains no message text and is never
               uploaded.
@@ -588,7 +582,6 @@ export function ReplyWorkspace({
                   } catch {}
                 });
                 setAdult(false);
-                setLaptop(null);
                 setVibe("Natural");
                 reset();
                 toast.success("Local preferences and feedback cleared.");

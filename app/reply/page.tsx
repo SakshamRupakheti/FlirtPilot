@@ -6,6 +6,7 @@ export default function ReplyPage() {
     <ReplyWorkspace
       localAI={!isHostedPreview() && process.env.AI_PROVIDER === "ollama"}
       previewOnly={isHostedPreview()}
+      providerName={process.env.AI_PROVIDER === "groq" ? "Groq" : "OpenAI"}
     />
   );
 }

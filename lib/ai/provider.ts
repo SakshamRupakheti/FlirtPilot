@@ -8,6 +8,7 @@ export class AIServiceError extends Error {
     public code:
       | "NOT_CONFIGURED"
       | "QUOTA_EXHAUSTED"
+      | "FREE_LIMIT_REACHED"
       | "UNAVAILABLE"
       | "INVALID_RESPONSE"
       | "LOCAL_UNAVAILABLE"
@@ -20,18 +21,26 @@ export async function callProvider(input: ReplyRequest) {
   const boundary = explicitBoundary(input);
   if (boundary) return boundary;
   if (process.env.AI_PROVIDER === "ollama") return callLocalProvider(input);
-  if (process.env.AI_PROVIDER && process.env.AI_PROVIDER !== "openai")
+  const groq = process.env.AI_PROVIDER === "groq";
+  if (process.env.AI_PROVIDER && process.env.AI_PROVIDER !== "openai" && !groq)
     throw new AIServiceError("NOT_CONFIGURED");
-  const key = process.env.AI_API_KEY,
-    model = process.env.AI_MODEL;
+  const key = groq
+      ? process.env.GROQ_API_KEY || process.env.Groq
+      : process.env.AI_API_KEY,
+    model = groq
+      ? process.env.GROQ_MODEL || "openai/gpt-oss-20b"
+      : process.env.AI_MODEL;
   if (!key || !model) throw new AIServiceError("NOT_CONFIGURED");
-  const base = process.env.AI_BASE_URL || "https://api.openai.com/v1";
+  const base = groq
+    ? "https://api.groq.com/openai/v1"
+    : process.env.AI_BASE_URL || "https://api.openai.com/v1";
   const url = new URL(base.replace(/\/$/, "") + "/chat/completions");
   if (url.protocol !== "https:" && process.env.NODE_ENV === "production")
     throw new AIServiceError("NOT_CONFIGURED");
   try {
     const response = await fetch(url, {
       method: "POST",
+      redirect: "manual",
       headers: {
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
@@ -47,13 +56,17 @@ export async function callProvider(input: ReplyRequest) {
           { role: "user", content: JSON.stringify(input) },
         ],
         response_format: outputFormat,
-        max_completion_tokens: 5000,
-        ...(model.startsWith("gpt-5") ? { reasoning_effort: "low" } : {}),
-        store: false,
+        max_completion_tokens: groq ? 2400 : 5000,
+        ...(groq || model.startsWith("gpt-5")
+          ? { reasoning_effort: "low" }
+          : {}),
+        ...(!groq ? { store: false } : {}),
       }),
       signal: AbortSignal.timeout(45000),
     });
     if (!response.ok) {
+      if (groq && response.status === 429)
+        throw new AIServiceError("FREE_LIMIT_REACHED");
       const failure: unknown = await response.json().catch(() => null);
       if (
         response.status === 429 &&
