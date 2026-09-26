@@ -51,7 +51,13 @@ const statuses = [
   "Cooking replies…",
   "Measuring the risk…",
 ];
-export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
+export function ReplyWorkspace({
+  localAI = false,
+  previewOnly = false,
+}: {
+  localAI?: boolean;
+  previewOnly?: boolean;
+}) {
   const [ready, setReady] = useState(false),
     [adult, setAdult] = useState(false),
     [message, setMessage] = useState(""),
@@ -92,7 +98,7 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
     regenerate = false,
     event?: ReplyRequest["feedback"][number],
   ) {
-    if (!adult || !message.trim() || pending.current) return;
+    if (previewOnly || !adult || !message.trim() || pending.current) return;
     pending.current = true;
     setBusy(true);
     setError("");
@@ -181,6 +187,7 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
       <Toaster theme="dark" />
       <AgeGate
         localAI={localAI}
+        previewOnly={previewOnly}
         open={ready && !adult}
         onConfirm={() => setAdult(true)}
       />
@@ -202,6 +209,16 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
             <MessageCircle size={29} />
           </span>
         </div>
+        {previewOnly && (
+          <p
+            role="status"
+            className="mb-6 rounded-2xl border border-pink-400/30 bg-pink-500/10 p-4 text-sm text-pink-100"
+          >
+            Mobile preview · Explore the interface and examples. Online AI isn’t
+            connected yet, so this preview won’t generate replies or send your
+            text to a model.
+          </p>
+        )}
         <div className="progress-steps" aria-label="Reply progress">
           {["The message", "The context", "Your next move"].map((label, i) => (
             <span
@@ -275,7 +292,7 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
                   </p>
                   <button
                     className="primary"
-                    disabled={!adult || !message.trim() || busy}
+                    disabled={previewOnly || !adult || !message.trim() || busy}
                     type="submit"
                   >
                     Read the room <ArrowRight size={16} />
@@ -283,7 +300,7 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
                 </div>
                 <button
                   type="button"
-                  disabled={busy || !adult || !message.trim()}
+                  disabled={previewOnly || busy || !adult || !message.trim()}
                   className="skip-button"
                   onClick={() => void request(true)}
                 >
@@ -539,9 +556,11 @@ export function ReplyWorkspace({ localAI = false }: { localAI?: boolean }) {
           <details>
             <summary>Privacy, in plain words</summary>
             <p>
-              {localAI
-                ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
-                : "Messages and context go to OpenAI to provide your requested advice. FlirtPilot doesn’t save chats or use them for training. OpenAI may retain abuse-monitoring logs under its API policy. "}
+              {previewOnly
+                ? "This preview does not send your text to an AI service. Text you enter stays in this page until you leave or reset it. "
+                : localAI
+                  ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
+                  : "Messages and context go to OpenAI to provide your requested advice. FlirtPilot doesn’t save chats or use them for training. OpenAI may retain abuse-monitoring logs under its API policy. "}
               Age confirmation, vibe preferences and feedback counts stay in
               this browser. Feedback contains no message text and is never
               uploaded.

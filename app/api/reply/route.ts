@@ -3,6 +3,8 @@ import { analyzeConversation } from "@/lib/ai/analyzeConversation";
 import { generateReplies } from "@/lib/ai/generateReplies";
 import { AIServiceError } from "@/lib/ai/provider";
 import { allowRequest } from "@/lib/ai/rate-limit";
+import { isHostedPreview } from "@/lib/ai/deployment";
+export const maxDuration = 60;
 const headers = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
@@ -10,6 +12,14 @@ const headers = {
 const reply = (data: unknown, status = 200) =>
   Response.json(data, { status, headers });
 export async function POST(request: Request) {
+  if (isHostedPreview())
+    return reply(
+      {
+        error:
+          "This hosted preview is ready to explore, but online AI is not connected yet. The local version still uses your laptop's model.",
+      },
+      503,
+    );
   const origin = request.headers.get("origin");
   if (origin && origin !== new URL(request.url).origin)
     return reply(

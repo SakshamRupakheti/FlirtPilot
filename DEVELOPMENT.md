@@ -83,3 +83,9 @@ Local event records contain event name, tier, time, anonymous ID and `consent: l
 9. Extended responsive/accessibility QA, motion and error polish.
 
 No accounts, pricing, subscriptions, social integrations or training pipeline are included.
+
+## Vercel mobile preview
+
+The user selected Vercel for mobile testing. `vercel.json` builds this same app with native Next.js (`npm run build:vercel`); the existing Vinext local workflow remains available. Deploy the deployment branch, since `main` currently contains only the original README. Do not upload `.env.local` or the keyboard access token.
+
+On Vercel, Reply is a clearly labeled interface preview unless a server-side OpenAI provider, key, and model are explicitly configured. Generation is disabled and API calls return a friendly 503 before reaching a model. The hosted keyboard endpoint is disabled. Vercel cannot reach laptop Ollama at localhost. The preview does not install the native iPhone keyboard or provide hosted inference. A separately authorized inference setup is required for online AI.
