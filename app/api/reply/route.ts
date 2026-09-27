@@ -8,6 +8,8 @@ export const maxDuration = 60;
 const headers = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
+  "X-FlirtPilot-Revision":
+    process.env.VERCEL_GIT_COMMIT_SHA || "local-development",
 };
 const reply = (data: unknown, status = 200) =>
   Response.json(data, { status, headers });

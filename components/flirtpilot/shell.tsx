@@ -26,6 +26,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           flirtpilot<span className="pink">✳</span>
         </Link>
         <span>A little context. A lot less overthinking.</span>
+        <Link href="/lab">Learning Lab</Link>
         <span>Made for adults. Built for real conversations.</span>
       </footer>
     </div>

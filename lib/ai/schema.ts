@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { exampleHintSchema } from "../learning";
 const text = z.string().trim().min(1).max(2400);
 export const questionSchema = z.object({
   id: z.string().regex(/^[a-zA-Z0-9_-]{1,60}$/),
@@ -30,6 +31,7 @@ export const requestSchema = z.object({
     .max(8)
     .default([]),
   previousReplies: z.array(z.string().max(1200)).max(3).default([]),
+  learningExamples: z.array(exampleHintSchema).max(2).default([]),
 });
 const reply = z.object({
   text: z.string().trim().min(1).max(1200),

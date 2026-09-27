@@ -30,6 +30,8 @@ import {
   type ReplyRequest,
 } from "@/lib/ai/schema";
 import { getLocal } from "@/lib/local-store";
+import { readExamples, selectExamples, learningKey } from "@/lib/learning";
+import { LearningEditor } from "./learning-editor";
 const goals = [
   "Just flirting",
   "Get their number/social",
@@ -61,6 +63,7 @@ export function ReplyWorkspace({
   providerName?: "Groq" | "OpenAI";
 }) {
   const unavailable = previewOnly;
+  const [useExamples, setUseExamples] = useState(false);
   const [ready, setReady] = useState(false),
     [adult, setAdult] = useState(false),
     [message, setMessage] = useState(""),
@@ -130,6 +133,9 @@ export function ReplyWorkspace({
           action: regenerate || skip ? "generate" : "analyze",
           vibe,
           feedback: feedback.current,
+          learningExamples: useExamples
+            ? selectExamples(readExamples(), message)
+            : [],
           previousReplies:
             regenerate && result?.status === "complete"
               ? Object.values(result.replies).map((r) => r.text)
@@ -557,6 +563,35 @@ export function ReplyWorkspace({
             onRegenerate={(event) => void request(true, true, event)}
           />
         )}
+        <section className="learning-reply-options">
+          <label className="learning-check">
+            <input
+              type="checkbox"
+              checked={useExamples}
+              onChange={(e) => setUseExamples(e.target.checked)}
+            />
+            Use my reviewed practice examples for this session
+          </label>
+          <p className="privacy-note">
+            When enabled, up to two relevant examples from this device are sent
+            to the AI provider with your next request. Evaluation examples are
+            excluded. <Link href="/lab">Open Learning Lab</Link>
+          </p>
+          {result?.status === "complete" && step === "result" && (
+            <details>
+              <summary>Teach my wingman — review an example</summary>
+              <p>
+                Rewrite a reply in your own words and explain what would be
+                better. Nothing is saved until you approve it.
+              </p>
+              <LearningEditor
+                key={message}
+                initial={message.slice(0, 1800)}
+                source="reply"
+              />
+            </details>
+          )}
+        </section>
         <div className="workspace-bottom">
           <button disabled={busy} className="text-button" onClick={reset}>
             Start a fresh conversation
@@ -567,11 +602,14 @@ export function ReplyWorkspace({
               {previewOnly
                 ? "This preview does not send your text to an AI service. Text you enter stays in this page until you leave or reset it. "
                 : localAI
-                  ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. FlirtPilot doesn’t save chats or use them for training. "
-                  : `Messages and context go to ${providerName} only when you request advice. FlirtPilot doesn’t save chats or use them for training. The provider’s retention and abuse-monitoring policies apply. `}
-              Age confirmation, vibe preferences and feedback counts stay in
-              this browser. Feedback contains no message text and is never
-              uploaded.
+                  ? "Messages and context are processed by Ollama on this computer. No cloud AI provider receives them. Chats are not automatically saved or used for training. "
+                  : `Messages and context go to ${providerName} only when you request advice. Chats are not automatically saved or used for training. The provider’s retention and abuse-monitoring policies apply. `}
+              Learning Lab saves only examples you explicitly approve on this
+              device. Optional example guidance sends selected practice examples
+              with your request. Dataset exports are separate and never
+              automatic. Age confirmation, vibe preferences and feedback counts
+              stay in this browser. Feedback contains no message text and is
+              never uploaded.
             </p>
             <button
               className="text-button"
@@ -581,10 +619,16 @@ export function ReplyWorkspace({
                     localStorage.removeItem(`flirtpilot:${k}`);
                   } catch {}
                 });
+                try {
+                  localStorage.removeItem(learningKey);
+                } catch {}
+                setUseExamples(false);
                 setAdult(false);
                 setVibe("Natural");
                 reset();
-                toast.success("Local preferences and feedback cleared.");
+                toast.success(
+                  "Local preferences, feedback and learning examples cleared.",
+                );
               }}
             >
               Clear my local data

@@ -108,3 +108,13 @@ After explicitly approving Cloudflare as the network intermediary, download offi
 
 Status: authenticated bridge tests and production build pass. Starting the public tunnel was blocked by automatic approval review pending explicit consent for conversation text and authorization traffic passing through Cloudflare. Do not represent external phone inference as verified until the tunnel is authorized and tested.
 `Groq` is accepted as a server-only alias for `GROQ_API_KEY` to support the existing write-only Vercel secret. The standard name takes precedence.
+# Learning Lab (September 27, 2026)
+
+- `/lab` is a device-local example review interface, not a shared admin database. Its page is public, but data is stored only in that browser under `flirtpilot:learning-v1`. No dataset is bundled with the app or committed to Git.
+- Supports pasted text, bounded UTF-8 `.txt` imports and local PNG/JPEG/WebP screenshot previews. Screenshot transcription is explicitly manual. Images use temporary object URLs and are not persisted or sent to providers.
+- Examples include a corrected preferred reply, reviewer lesson, anonymous grouping, source, timestamp, versioned adult/review attestations and separate export permission. Common identifier masking is a helper, not guaranteed anonymization.
+- A session-only, default-off Reply checkbox sends up to two relevant practice examples as untrusted style demonstrations. It uses lexical matching, not fine-tuning. Evaluation examples never enter this selection.
+- Each person/conversation group must stay in one split. Evaluation tests send only the held-out conversation to the current reply endpoint, with no library or expected answer. The user judges quality and can download a private report. This is not a benchmark of romantic outcomes.
+- JSONL exports include only sharing-approved examples, separately for practice and evaluation, with provenance and consent version. Exports are intermediate reviewed records, not a provider-specific ready-to-run training job. Removing local data or consent prevents future exports but cannot retract already downloaded files.
+- Storage writes are bounded (200 examples), validated and report failures. No unreviewed automatic collection, central ingestion, background retraining, model-weight update or paid infrastructure is enabled.
+- Pending: automatic image extraction with explicit provider disclosure, authenticated shared ingestion with participant consent records and deletion workflow, dataset deduplication across devices, versioned benchmark automation, and a separately provisioned fine-tuning pipeline. Actual training needs an approved dataset and compute/provider configuration; the free Groq endpoint does not supply training.
