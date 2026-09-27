@@ -1,7 +1,7 @@
 import { requestSchema } from "@/lib/ai/schema";
 import { analyzeConversation } from "@/lib/ai/analyzeConversation";
 import { generateReplies } from "@/lib/ai/generateReplies";
-import { AIServiceError } from "@/lib/ai/provider";
+import { AIServiceError, callProvider } from "@/lib/ai/provider";
 import { allowRequest } from "@/lib/ai/rate-limit";
 import { isHostedPreview } from "@/lib/ai/deployment";
 export const maxDuration = 60;
@@ -73,6 +73,10 @@ export async function POST(request: Request) {
         { error: "Confirm everyone is 18+ and check your message length." },
         400,
       );
+    if (parsed.data.action === "check" && !parsed.data.draft)
+      return reply({ error: "Add the reply you want to check." }, 400);
+    if (parsed.data.action === "check")
+      return reply(await callProvider(parsed.data));
     const result = await (
       parsed.data.action === "generate" ? generateReplies : analyzeConversation
     )(parsed.data);

@@ -11,7 +11,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           flirtpilot<span className="beta">BETA</span>
         </Link>
         <nav aria-label="Main navigation">
-          <Link href="/#modes">The wingman</Link>
+          <Link href="/check">Check my reply</Link>
           <Link href="/#how-it-works" className="desktop-link">
             How it works
           </Link>

@@ -13,7 +13,8 @@ export const requestSchema = z.object({
     .refine((v) => Object.keys(v).length <= 16),
   adultConfirmed: z.literal(true),
   skipQuestions: z.boolean().default(false),
-  action: z.enum(["analyze", "generate"]).default("analyze"),
+  action: z.enum(["analyze", "generate", "check"]).default("analyze"),
+  draft: z.string().trim().max(1200).default(""),
   vibe: z.string().max(40).default("Natural"),
   feedback: z
     .array(
@@ -55,6 +56,18 @@ export const resultSchema = z.discriminatedUnion("status", [
     replies: z.object({ safe: reply, bold: reply, risky: reply }),
   }),
   z.object({ status: z.literal("boundary"), message: text }),
+  z.object({
+    status: z.literal("draft_check"),
+    summary: text,
+    confidence: z.enum(["low", "medium", "high"]),
+    risk: z.number().int().min(0).max(100),
+    bluntness: z.number().int().min(0).max(100),
+    sexualForwardness: z.number().int().min(0).max(100),
+    evidence: z.array(text).min(1).max(4),
+    missingContext: z.string().max(600),
+    recommendation: text,
+    rewrite: z.string().trim().min(1).max(1200),
+  }),
 ]);
 export type ReplyRequest = z.infer<typeof requestSchema>;
 export type AnalysisResult = z.infer<typeof resultSchema>;

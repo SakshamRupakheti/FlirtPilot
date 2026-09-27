@@ -3,6 +3,7 @@ import { SYSTEM_PROMPT } from "./prompt";
 import { outputFormat } from "./structured-output";
 import { LOCAL_SYSTEM_PROMPT } from "./local-prompt";
 import { explicitBoundary } from "./boundaries";
+import { DRAFT_CHECK_PROMPT } from "./draft-prompt";
 export class AIServiceError extends Error {
   constructor(
     public code:
@@ -51,7 +52,10 @@ export async function callProvider(input: ReplyRequest) {
           {
             role: "system",
             content:
-              SYSTEM_PROMPT + '\nWrap your chosen response in {"result": ...}.',
+              SYSTEM_PROMPT +
+              "\n" +
+              DRAFT_CHECK_PROMPT +
+              '\nWrap your chosen response in {"result": ...}.',
           },
           { role: "user", content: JSON.stringify(input) },
         ],
@@ -97,6 +101,11 @@ export async function callProvider(input: ReplyRequest) {
     const result = resultSchema.safeParse(JSON.parse(content).result);
     if (!result.success) throw new AIServiceError("INVALID_RESPONSE");
     if (
+      result.data.status !== "boundary" &&
+      (input.action === "check") !== (result.data.status === "draft_check")
+    )
+      throw new AIServiceError("INVALID_RESPONSE");
+    if (
       (input.skipQuestions || input.action === "generate") &&
       result.data.status === "questions"
     )
@@ -141,7 +150,7 @@ async function callLocalProvider(input: ReplyRequest) {
         messages: [
           {
             role: "system",
-            content: LOCAL_SYSTEM_PROMPT,
+            content: LOCAL_SYSTEM_PROMPT + "\n" + DRAFT_CHECK_PROMPT,
           },
           { role: "user", content: payload },
         ],
@@ -162,6 +171,12 @@ async function callLocalProvider(input: ReplyRequest) {
       throw new AIServiceError("INVALID_RESPONSE");
     }
     const parsed = resultSchema.safeParse(raw);
+    if (
+      parsed.success &&
+      parsed.data.status !== "boundary" &&
+      (input.action === "check") !== (parsed.data.status === "draft_check")
+    )
+      throw new AIServiceError("INVALID_RESPONSE");
     if (
       !parsed.success ||
       ((input.skipQuestions || input.action === "generate") &&

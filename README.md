@@ -2,6 +2,18 @@
 
 **Never wonder what to text again.**
 
+## Current website and source
+
+The live Vercel website is built from [`codex/vercel-deployment`](https://github.com/SakshamRupakheti/FlirtPilot/tree/codex/vercel-deployment). The original `main` branch is not the deployed app.
+
+- [Reply](https://flirt-pilot-lake.vercel.app/reply): contextual replies using hosted Groq.
+- [Check my reply](https://flirt-pilot-lake.vercel.app/check): on-demand draft tone assessment and rewrite. Scores are rough judgments, not outcome probabilities.
+- [Learning Lab](https://flirt-pilot-lake.vercel.app/lab): reviewed device-local examples, opt-in guidance, evaluation and consent-based export. No automatic model training.
+
+Code map: `app/` contains pages and server endpoints, `components/flirtpilot/` contains product UI, `lib/ai/` contains AI schemas/prompts/providers, `lib/learning.ts` handles reviewed examples, and `tests/` contains regression tests. See `DEVELOPMENT.md` for current deployment details. `ios/` is native source, not an installed keyboard.
+
+For hosted Groq use server-only `AI_PROVIDER=groq`, `GROQ_API_KEY` and optionally `GROQ_MODEL=openai/gpt-oss-20b`. The existing Vercel secret named `Groq` is supported as an alias. Never commit keys or personal chats. The local Ollama alternative is documented below.
+
 A context-aware AI texting wingman for adults. This first implementation focuses on the landing experience and the Reply workflow (Phases 1 and 2).
 
 ## Quick start

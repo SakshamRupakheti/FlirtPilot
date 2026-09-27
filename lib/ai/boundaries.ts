@@ -3,7 +3,7 @@ import type { ReplyRequest, AnalysisResult } from "./schema";
 // Defense in depth for explicit statements; model instructions handle ambiguous
 // and multilingual cases. This is intentionally not a complete safety classifier.
 export function explicitBoundary(input: ReplyRequest): AnalysisResult | null {
-  const text = [input.message, ...Object.values(input.context)].join("\n");
+  const text = [input.message, input.draft, ...Object.values(input.context)].join("\n");
   const noContact =
     /\b(?:never|do not|don't|don’t|stop)\s+(?:ever\s+)?(?:contact(?:ing)?|text(?:ing)?|messag(?:e|ing)|call(?:ing)?)\s+(?:me|them|him|her)\b|\b(?:asked|told|said|requested)\b[^.!?\n]{0,60}\bno[ -]contact\b|\bblocked\s+me\b[^.!?\n]{0,120}\b(?:another|new|different)\s+account\b/i;
   if (noContact.test(text))

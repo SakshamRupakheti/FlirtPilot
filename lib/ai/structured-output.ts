@@ -17,6 +17,18 @@ export const outputFormat = {
       result: {
         anyOf: [
           object({
+            status: { type: "string", enum: ["draft_check"] },
+            summary: string,
+            confidence: { type: "string", enum: ["low", "medium", "high"] },
+            risk: { type: "integer", minimum: 0, maximum: 100 },
+            bluntness: { type: "integer", minimum: 0, maximum: 100 },
+            sexualForwardness: { type: "integer", minimum: 0, maximum: 100 },
+            evidence: array(string),
+            missingContext: string,
+            recommendation: string,
+            rewrite: string,
+          }),
+          object({
             status: { type: "string", enum: ["questions"] },
             contextQuestions: array(
               object({ id: string, question: string, options: array(string) }),
