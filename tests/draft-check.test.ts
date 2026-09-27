@@ -63,6 +63,17 @@ test("check endpoint preserves check action, validates draft, and rejects incomp
     globalThis.fetch = async (_url, options) => {
       calls++;
       const payload = JSON.parse(String(options?.body));
+      assert.equal(
+        payload.response_format.json_schema.name,
+        "flirtpilot_draft_check",
+      );
+      assert.deepEqual(
+        payload.response_format.json_schema.schema.properties.result.anyOf.map(
+          (branch: { properties: { status: { enum: string[] } } }) =>
+            branch.properties.status.enum[0],
+        ),
+        ["draft_check", "boundary"],
+      );
       const user = JSON.parse(payload.messages[1].content);
       assert.equal(user.action, "check");
       assert.equal(user.draft, input.draft);
@@ -76,7 +87,10 @@ test("check endpoint preserves check action, validates draft, and rejects incomp
     assert.equal(calls, 0);
     const response = await POST(request(input));
     assert.equal(response.status, 200);
-    assert.equal(resultSchema.parse(await response.json()).status, "draft_check");
+    assert.equal(
+      resultSchema.parse(await response.json()).status,
+      "draft_check",
+    );
     globalThis.fetch = async () =>
       Response.json({
         choices: [
