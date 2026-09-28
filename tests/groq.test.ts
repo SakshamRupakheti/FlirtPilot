@@ -9,7 +9,7 @@ test("Groq uses separate server credentials, strict JSON, no paid fallback, and 
   const original = globalThis.fetch;
   const saved = { ...process.env };
   const input = requestSchema.parse({
-    message: "haha maybe",
+    message: "Should I double text?",
     adultConfirmed: true,
     context: {},
   });
@@ -39,6 +39,11 @@ test("Groq uses separate server credentials, strict JSON, no paid fallback, and 
       );
       assert.equal(options?.redirect, "manual");
       const body = JSON.parse(String(options?.body));
+      assert.match(body.messages[0].content, /not proof of rejection/);
+      assert.doesNotMatch(
+        body.messages[0].content,
+        /You are a pure Gen Z speaker/,
+      );
       assert.equal(body.model, "openai/gpt-oss-20b");
       assert.equal(body.response_format.json_schema.strict, true);
       assert.equal(body.reasoning_effort, "low");

@@ -5,6 +5,7 @@ import { LOCAL_SYSTEM_PROMPT } from "./local-prompt";
 import { explicitBoundary } from "./boundaries";
 import { DRAFT_CHECK_PROMPT } from "./draft-prompt";
 import { casualStyleGuide } from "./casual-style";
+import { publicExampleGuide } from "./curated-examples";
 export class AIServiceError extends Error {
   constructor(
     public code:
@@ -60,6 +61,7 @@ export async function callProvider(input: ReplyRequest) {
               DRAFT_CHECK_PROMPT +
               "\n" +
               casualStyleGuide(input) +
+              publicExampleGuide(input) +
               '\nWrap your chosen response in {"result": ...}.',
           },
           { role: "user", content: JSON.stringify(input) },
@@ -177,7 +179,8 @@ async function callLocalProvider(input: ReplyRequest) {
               "\n" +
               DRAFT_CHECK_PROMPT +
               "\n" +
-              casualStyleGuide(input),
+              casualStyleGuide(input) +
+              publicExampleGuide(input),
           },
           { role: "user", content: payload },
         ],

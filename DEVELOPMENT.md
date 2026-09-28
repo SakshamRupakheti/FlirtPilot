@@ -131,3 +131,10 @@ Status: authenticated bridge tests and production build pass. Starting the publi
 - Both AI providers receive guidance to preserve conversational register and keep platonic goals platonic. A six-term reviewed CC0 Kaggle glossary is included only for terms present in the submitted message/draft; no extra provider call is required.
 - See `data/README.md` for dataset provenance, selected preview rows, and limitations. These are synthetic vocabulary references, not real US chat logs, training examples, or a model-weight update. No private chats are automatically collected.
 - Validation: added a vocabulary-selection regression test; the sequential suite passes 21 tests. Mobile layout and deployment verification are recorded in the task handoff.
+# Curated synthetic chat guidance — September 28, 2026
+
+- Downloaded the Kaggle author's linked source corpus; validated 3,511 JSONL records against a pinned hash. Added 11 reviewed/adapted situations, not an unfiltered training dump.
+- `lib/ai/curated-examples.ts` retrieves at most two matching examples for the shared cloud/local provider. Source system prompts, raw source replies, and evaluation cases are excluded.
+- `data/curated-chat.json` records source lines, adaptation status and provenance; third-party MIT notice and review limitations are included in `data/`. Raw download stays ignored.
+- `AI_CURATED_EXAMPLES=off` is a server kill switch. No new network dependency, automatic training, or private data collection. Added tokens may modestly affect cost/latency for matching requests.
+- `data/chat-evaluation.json` holds seven original adult evaluation cases; `scripts/evaluate-public-chat.ts` runs them against an explicitly supplied app URL without reading private chats. Unit tests cover relevance, matching, bounded selection, provenance, evaluation isolation, kill switch and provider integration. These do not establish a measured gain in social accuracy.
