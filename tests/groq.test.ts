@@ -46,7 +46,8 @@ test("Groq uses separate server credentials, strict JSON, no paid fallback, and 
       );
       assert.equal(body.model, "openai/gpt-oss-20b");
       assert.equal(body.response_format.json_schema.strict, true);
-      assert.equal(body.reasoning_effort, "low");
+      assert.equal(body.reasoning_effort, "medium");
+      assert.doesNotMatch(body.messages[0].content, /When action=check/);
       assert.equal(body.store, undefined);
       return Response.json({
         choices: [
