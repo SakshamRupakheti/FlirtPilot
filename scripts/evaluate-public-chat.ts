@@ -4,7 +4,7 @@ import { requestSchema, resultSchema } from "../lib/ai/schema";
 
 // Explicitly run against your app: tsx scripts/evaluate-public-chat.ts URL report.json
 // Sends only the checked-in synthetic test cases. No local chats or secrets read.
-const [base, output] = process.argv.slice(2);
+const [base, output, startAt = "0"] = process.argv.slice(2);
 if (!base || !output) throw new Error("Supply an app origin and report path.");
 const url = new URL("/api/reply", base);
 if (
@@ -13,7 +13,12 @@ if (
 )
   throw new Error("Use HTTPS or a loopback app.");
 const results = [];
-for (const sample of cases.cases) {
+const offset = Number(startAt);
+if (!Number.isInteger(offset) || offset < 0 || offset >= cases.cases.length)
+  throw new Error("Optional start index must identify an evaluation case.");
+for (const [index, sample] of cases.cases.slice(offset).entries()) {
+  // Pace free-tier requests; this is not a quota bypass. Stop on any error.
+  if (index > 0) await new Promise((resolve) => setTimeout(resolve, 30000));
   const started = Date.now();
   const response = await fetch(url, {
     method: "POST",

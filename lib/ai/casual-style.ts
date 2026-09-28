@@ -29,5 +29,5 @@ export function casualStyleGuide(
     matches.length
       ? `Vocabulary reference from a synthetic CC0 Kaggle dataset, not evidence about these people: ${matches.map(({ term, meaning }) => `${term}: ${meaning}`).join("; ")}. Use only when the conversation supports that meaning.`
       : ""
-  }`;
+  }\nFor an unanswered recent message, giving the other person time can be the best strategy. Never assume plans are confirmed: avoid "still on" or "still works" unless they agreed. Never invent having a perfect venue in mind, free time, or being tired. A story view alone does not establish interest or rejection. Generated replies may be optional later messages; do not urge immediate follow-ups just to fill the reply cards.`;
 }

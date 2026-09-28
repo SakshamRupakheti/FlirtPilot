@@ -2,9 +2,9 @@
 
 ## Curated chat situations (September 28, 2026)
 
-`curated-chat.json` adds 11 agent-reviewed adaptations of situations from Grenish Rai's [Gen Z SFT Dataset on Kaggle](https://www.kaggle.com/datasets/grenishrai2033d/genz-sft-dataset). The full 2.43 MB JSONL was downloaded from the author's linked [Hugging Face repository](https://huggingface.co/datasets/grenishrai/genz-sft-dataset). Both cards declare MIT; attribution and terms are in `THIRD_PARTY_NOTICES.md`.
+`curated-chat.json` adds 23 agent-reviewed adaptations of situations from Grenish Rai's [Gen Z SFT Dataset on Kaggle](https://www.kaggle.com/datasets/grenishrai2033d/genz-sft-dataset). The full 2.43 MB JSONL was downloaded from the author's linked [Hugging Face repository](https://huggingface.co/datasets/grenishrai/genz-sft-dataset). Both cards declare MIT; attribution and terms are in `THIRD_PARTY_NOTICES.md`.
 
-All 3,511 records passed structural validation. That is NOT a claim that all records passed a quality or safety review. A dating/texting subset was inspected; 11 situations were chosen with rewritten guidance and replies. The dataset includes age-unspecified and school scenarios, so it is not an adult-only corpus. Selected examples are non-explicit; they never establish the age or consent of anyone in a current request. Existing adult gates and boundaries remain authoritative.
+All 3,511 records passed structural validation. That is NOT a claim that all records passed a quality or safety review. A dating/texting subset was inspected; 23 situations were chosen with rewritten guidance and replies. The dataset includes age-unspecified and school scenarios, so it is not an adult-only corpus. Selected examples are non-explicit; they never establish the age or consent of anyone in a current request. Existing adult gates and boundaries remain authoritative.
 
 Rejected patterns included certain conclusions from story views, universal bans on double texting, gender assumptions, shaming, excessive slang and forced ALL-CAPS reactions. Source assistant outputs and the fixed system persona were NOT imported. Adaptations are explicitly marked as AI/agent-reviewed, not human-reviewed. They are not representative samples of Americans or evidence of romantic success.
 

@@ -43,6 +43,17 @@ test("public examples are relevant, bounded, and exclude source personas and met
   assert.ok(
     publicExampleGuide({ message: "are you mad", draft: "" }).length < 2200,
   );
+  const support = selectPublicExamples({
+    message: "my friend just broke up",
+    draft: "",
+  });
+  assert.equal(support.length, 1);
+  assert.match(support[0].lesson, /Don't use their vulnerable moment/);
+  assert.match(
+    selectPublicExamples({ message: "an old friend texted", draft: "" })[0]
+      .lesson,
+    /don't invent a memory/,
+  );
 });
 
 test("reviewed library has unique provenance and evaluation source situations remain excluded", () => {
