@@ -124,3 +124,10 @@ Status: authenticated bridge tests and production build pass. Starting the publi
 - Structured, validated output separates tone mismatch risk, bluntness and sexual forwardness on rough 0–100 ordinal scales. UI rounds to tens and explicitly states these are not probabilities of rejection, attraction or consent. Missing context and confidence are shown alongside evidence and a lower-pressure rewrite.
 - Editing inputs clears stale results; users can copy a rewrite or use it as a new draft and recheck. Text is not persisted or automatically shared to the Lab. Provider prompt handles context and boundaries; deterministic checks also inspect the proposed draft.
 - This is a mobile web composer, not an overlay on other apps or an installed keyboard. Native integration still requires signed platform apps and a device authentication flow; existing `/api/keyboard` is unchanged.
+# Mobile discovery and casual-language reference — September 28, 2026
+
+- The home hero now pairs large icon buttons for Help me reply and Check my reply. Check also has a mode card and remains visible in the mobile header.
+- Let’s talk fades/collapses on the Reply route and is removed from keyboard/screen-reader interaction while hidden. Reduced-motion preferences disable transitions.
+- Both AI providers receive guidance to preserve conversational register and keep platonic goals platonic. A six-term reviewed CC0 Kaggle glossary is included only for terms present in the submitted message/draft; no extra provider call is required.
+- See `data/README.md` for dataset provenance, selected preview rows, and limitations. These are synthetic vocabulary references, not real US chat logs, training examples, or a model-weight update. No private chats are automatically collected.
+- Validation: added a vocabulary-selection regression test; the sequential suite passes 21 tests. Mobile layout and deployment verification are recorded in the task handoff.
