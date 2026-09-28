@@ -31,7 +31,7 @@ export async function callProvider(input: ReplyRequest) {
       ? process.env.GROQ_API_KEY || process.env.Groq
       : process.env.AI_API_KEY,
     model = groq
-      ? process.env.GROQ_MODEL || "openai/gpt-oss-120b"
+      ? process.env.GROQ_MODEL || "openai/gpt-oss-20b"
       : process.env.AI_MODEL;
   if (!key || !model) throw new AIServiceError("NOT_CONFIGURED");
   const base = groq
