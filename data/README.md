@@ -2,6 +2,8 @@
 
 ## Curated chat situations (September 28, 2026)
 
+See `EVALUATION.md` and `evaluations/` for the completed development runs, remaining quality failures, and the decision to retain the faster 20B model after a 120B trial. These cases were used during development and are not an independent benchmark.
+
 `curated-chat.json` adds 23 agent-reviewed adaptations of situations from Grenish Rai's [Gen Z SFT Dataset on Kaggle](https://www.kaggle.com/datasets/grenishrai2033d/genz-sft-dataset). The full 2.43 MB JSONL was downloaded from the author's linked [Hugging Face repository](https://huggingface.co/datasets/grenishrai/genz-sft-dataset). Both cards declare MIT; attribution and terms are in `THIRD_PARTY_NOTICES.md`.
 
 All 3,511 records passed structural validation. That is NOT a claim that all records passed a quality or safety review. A dating/texting subset was inspected; 23 situations were chosen with rewritten guidance and replies. The dataset includes age-unspecified and school scenarios, so it is not an adult-only corpus. Selected examples are non-explicit; they never establish the age or consent of anyone in a current request. Existing adult gates and boundaries remain authoritative.
