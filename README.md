@@ -12,7 +12,7 @@ The live Vercel website is built from [`codex/vercel-deployment`](https://github
 
 Code map: `app/` contains pages and server endpoints, `components/flirtpilot/` contains product UI, `lib/ai/` contains AI schemas/prompts/providers, `lib/learning.ts` handles reviewed examples, and `tests/` contains regression tests. See `DEVELOPMENT.md` for current deployment details. `ios/` is native source, not an installed keyboard.
 
-For hosted Groq use server-only `AI_PROVIDER=groq`, `GROQ_API_KEY` and optionally `GROQ_MODEL=openai/gpt-oss-20b`. The existing Vercel secret named `Groq` is supported as an alias. Never commit keys or personal chats. The local Ollama alternative is documented below.
+For hosted Groq use server-only `AI_PROVIDER=groq`, `GROQ_API_KEY` and optionally `GROQ_MODEL=openai/gpt-oss-120b`. The existing Vercel secret named `Groq` is supported as an alias. Never commit keys or personal chats. The local Ollama alternative is documented below.
 
 A context-aware AI texting wingman for adults. This first implementation focuses on the landing experience and the Reply workflow (Phases 1 and 2).
 
