@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "source": "https://www.kaggle.com/datasets/grenishrai2033d/genz-sft-dataset",
+  "upstream": "https://huggingface.co/datasets/grenishrai/genz-sft-dataset",
+  "sha256": "6d6728fb4d00a0490d100b26f96230d2ae553f22701f246417accfaf9cad001a",
+  "license": "MIT",
+  "synthetic": true,
+  "reviewedOn": "2026-09-28",
+  "adaptation": "Source situations selected by Codex; guidance and sample replies rewritten for FlirtPilot. No source assistant reply or system persona is used verbatim. Not human-reviewed or evidence of real dating outcomes.",
+  "examples": [
+    {
+      "id": "date-nerves",
+      "sourceLine": 31,
+      "sourcePrompt": "I have a first date tonight and I'm nervous",
+      "triggers": [
+        "first date tonight",
+        "nervous about a date",
+        "first date nerves"
+      ],
+      "lesson": "Nerves do not mean the date will go badly. Keep a confirmation simple, show curiosity, and avoid performing a fake persona. Do not pretend attraction or a good outcome is guaranteed.",
+      "reply": "looking forward to seeing you"
+    },
+    {
+      "id": "unexpected-encounter",
+      "sourceLine": 54,
+      "sourcePrompt": "I saw my crush at the grocery store and panicked",
+      "triggers": ["saw my crush", "ran into my crush"],
+      "lesson": "An awkward encounter is not a catastrophe. If the user wants to acknowledge it, keep it light rather than inventing a story or humiliating themselves. A greeting does not establish romantic interest.",
+      "reply": "hey, nice running into you earlier"
+    },
+    {
+      "id": "friend-moving",
+      "sourceLine": 110,
+      "sourcePrompt": "My best friend is moving away",
+      "triggers": ["friend is moving away", "friend moving away"],
+      "lesson": "Acknowledge the friendship and suggest a realistic way to stay in touch. Don't imply romance, guilt them for moving, or make promises the user hasn't chosen.",
+      "reply": "gonna miss having you around. want to hang out before you go?"
+    },
+    {
+      "id": "canceled-plans",
+      "sourceLine": 148,
+      "sourcePrompt": "My friend canceled last minute again",
+      "triggers": [
+        "canceled last minute",
+        "cancelled last minute",
+        "keeps canceling plans",
+        "keeps cancelling plans"
+      ],
+      "lesson": "One cancellation can have many causes. Repeated cancellations may justify a calm boundary, but are not proof of disrespect. Ask whether they want to reschedule without guilt or pressure; don't invent why they canceled.",
+      "reply": "got it. let me know when you'd like to reschedule"
+    },
+    {
+      "id": "one-sided-chat",
+      "sourceLine": 190,
+      "sourcePrompt": "My friend only talks about themselves",
+      "triggers": [
+        "only talks about themselves",
+        "conversation feels one sided"
+      ],
+      "lesson": "Invite reciprocity or explain the user's need without labeling the other person selfish from one excerpt. Keep a friendship goal platonic; do not suggest jealousy or punishment.",
+      "reply": "can i tell you about something from my day too?"
+    },
+    {
+      "id": "gift-thanks",
+      "sourceLine": 635,
+      "sourcePrompt": "my friend got me a gift, what do I say",
+      "triggers": ["got me a gift", "gave me a gift", "thank them for a gift"],
+      "lesson": "A simple specific thank-you is enough. Reference a detail only if provided. Don't manufacture loving the gift, romantic feelings, or exaggerated slang.",
+      "reply": "thank you for thinking of me, that was really kind"
+    },
+    {
+      "id": "quiet-friend",
+      "sourceLine": 714,
+      "sourcePrompt": "my friend is being weird today",
+      "triggers": ["friend is being weird", "friend seems quiet"],
+      "lesson": "A change in tone has many possible explanations. Check in gently without diagnosing them, accusing them, or demanding an explanation. Respect their choice not to talk.",
+      "reply": "hey, how are you doing? here if you want to talk"
+    },
+    {
+      "id": "support-breakup",
+      "sourceLine": 721,
+      "sourcePrompt": "my friend is going through a breakup",
+      "triggers": ["friend is going through a breakup", "friend just broke up"],
+      "lesson": "Offer support and let the friend choose what helps. Don't use their vulnerable moment as an opening for romance, insult the ex without context, or promise a quick recovery.",
+      "reply": "want to talk about it, or would a distraction help?"
+    },
+    {
+      "id": "privacy-space",
+      "sourceLine": 745,
+      "sourcePrompt": "my friend is being secretive",
+      "triggers": ["friend is being secretive", "won't tell me what's wrong"],
+      "lesson": "Privacy is not proof of dishonesty. Express care and give them room. Don't recommend snooping, repeated demands, or invent a surprise as the explanation.",
+      "reply": "no pressure to explain. i'm here if you want to talk"
+    },
+    {
+      "id": "old-friend",
+      "sourceLine": 1332,
+      "sourcePrompt": "i got a random text from an old friend",
+      "triggers": [
+        "text from an old friend",
+        "old friend texted",
+        "old friend reached out"
+      ],
+      "lesson": "A friendly response can reopen a conversation without assuming romance or an ulterior motive. Use shared history only if actually provided; don't invent a memory.",
+      "reply": "hey, it's been a while! how have you been?"
+    },
+    {
+      "id": "reschedule-date",
+      "sourceLine": 1832,
+      "sourcePrompt": "I have a runny nose and a date",
+      "triggers": [
+        "sick before a date",
+        "sick and have a date",
+        "reschedule a date"
+      ],
+      "lesson": "Help communicate a reschedule clearly without inventing a diagnosis, excuse or free day. Express continued interest only if the user has it; proposing another time can be an option.",
+      "reply": "can we find another time that works for both of us?"
+    },
+    {
+      "id": "good-morning",
+      "sourceLine": 1862,
+      "sourcePrompt": "I keep almost texting my crush good morning",
+      "triggers": [
+        "texting my crush good morning",
+        "send a good morning text",
+        "text them good morning"
+      ],
+      "lesson": "A greeting can be welcome depending on the existing relationship. Don't call it desperate or treat daily greetings as a strategy to manufacture attachment. Match their established frequency and respect unanswered messages.",
+      "reply": "morning, hope your day goes well"
+    },
+    {
+      "id": "first-text",
+      "sourceLine": 78,
+      "sourcePrompt": "Should I text first or wait",
+      "triggers": ["text first", "make the first move"],
+      "lesson": "There is no required waiting game. If contact is welcome, a simple relevant message is fine. Don't prescribe a schedule or repeated unanswered messages.",
+      "reply": "hey, how did your day go?"
+    },
+    {
+      "id": "risky-draft",
+      "sourceLine": 134,
+      "sourcePrompt": "Should I send a risky text",
+      "triggers": ["risky text", "risky reply"],
+      "lesson": "Ask what the draft says and what the relationship is. Honest interest and abrupt sexual escalation are different. Do not approve an unseen risky draft.",
+      "reply": "i'd like to see you again, if you're up for it"
+    },
+    {
+      "id": "date-invitation",
+      "sourceLine": 640,
+      "sourcePrompt": "what's a good first date idea",
+      "triggers": ["first date idea", "ask them out", "coffee date"],
+      "lesson": "Offer a specific low-pressure option with an easy way to decline. Do not invent a shared venue, availability or affirmative interest.",
+      "reply": "would you be up for coffee sometime?"
+    },
+    {
+      "id": "work-crush",
+      "sourceLine": 674,
+      "sourcePrompt": "I have a crush on my coworker",
+      "triggers": ["crush on my coworker", "crush at work"],
+      "lesson": "Work friendliness alone is not flirting. Consider professional boundaries and power differences; don't pressure someone who cannot comfortably decline.",
+      "reply": "nice talking with you today"
+    },
+    {
+      "id": "story-reply",
+      "sourceLine": 763,
+      "sourcePrompt": "Should I reply to my crush's story",
+      "triggers": [
+        "reply to their story",
+        "reply to my crush's story",
+        "story opener"
+      ],
+      "lesson": "Respond to a detail actually provided in the story. Avoid generic compliments and do not infer attraction from views or likes. Ask for the story content when it is missing.",
+      "reply": "that looks fun, what was it like?"
+    },
+    {
+      "id": "express-interest",
+      "sourceLine": 788,
+      "sourcePrompt": "Should I tell my crush I like them over text",
+      "triggers": [
+        "tell them i like them",
+        "tell my crush i like",
+        "confess my feelings"
+      ],
+      "lesson": "Keep an expression of interest clear and low-pressure. Don't promise reciprocation or make the recipient responsible for the user's feelings.",
+      "reply": "i like talking with you and i'd be interested in a date. how do you feel?"
+    },
+    {
+      "id": "dry-tone",
+      "sourceLine": 814,
+      "sourcePrompt": "My friend asked are you mad when I was just dry",
+      "triggers": ["are you mad", "sounded mad", "text sounded angry"],
+      "lesson": "A short message may read differently than intended. If the user says they are not upset, a brief clarification can help. Don't invent being tired or deny anger unless the user supplies that fact.",
+      "reply": "sorry, that came out a bit blunt"
+    },
+    {
+      "id": "late-reply",
+      "sourceLine": 1406,
+      "sourcePrompt": "i keep forgetting to reply to texts",
+      "triggers": [
+        "forgot to reply",
+        "forgetting to reply",
+        "forgot to text back"
+      ],
+      "lesson": "Acknowledge a late response briefly, then return to the actual conversation. No elaborate excuses or invented reason for the delay.",
+      "reply": "sorry for the late reply! how did it go?"
+    },
+    {
+      "id": "follow-up",
+      "sourceLine": 1480,
+      "sourcePrompt": "Should I double text after 4 hours",
+      "triggers": ["double text", "double texting", "follow up after no reply"],
+      "lesson": "A few hours without a reply is not proof of rejection. For a non-urgent message sent just two hours ago, recommend giving them time; any suggested text is an optional later follow-up, not a command to send now. Don't call the user desperate or impose a universal waiting rule. An unanswered invitation is not an agreed plan.",
+      "reply": "hey, would saturday work for you?"
+    },
+    {
+      "id": "respect-decline",
+      "sourceLine": 1840,
+      "sourcePrompt": "Is it over if they said I'm not looking to date right now",
+      "triggers": [
+        "not looking to date",
+        "not interested in dating",
+        "just want to be friends"
+      ],
+      "lesson": "Accept the stated boundary at face value. Do not treat it as a challenge, future reservation, or invitation to persuade. If no contact is requested, don't suggest any further message.",
+      "reply": "thanks for being honest, i respect that"
+    },
+    {
+      "id": "later-plans",
+      "sourceLine": 1872,
+      "sourcePrompt": "My crush asked what I'm doing later and I froze",
+      "triggers": [
+        "what are you doing later",
+        "what i'm doing later",
+        "what you doing later"
+      ],
+      "lesson": "Answer naturally using only known plans, then return the question. Asking about plans may be friendly or flirty; it is not evidence of consent to sexual escalation.",
+      "reply": "what did you have in mind?"
+    }
+  ]
+}

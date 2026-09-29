@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { exampleHintSchema } from "../learning";
 const text = z.string().trim().min(1).max(2400);
 export const questionSchema = z.object({
   id: z.string().regex(/^[a-zA-Z0-9_-]{1,60}$/),
@@ -12,7 +13,8 @@ export const requestSchema = z.object({
     .refine((v) => Object.keys(v).length <= 16),
   adultConfirmed: z.literal(true),
   skipQuestions: z.boolean().default(false),
-  action: z.enum(["analyze", "generate"]).default("analyze"),
+  action: z.enum(["analyze", "generate", "check"]).default("analyze"),
+  draft: z.string().trim().max(1200).default(""),
   vibe: z.string().max(40).default("Natural"),
   feedback: z
     .array(
@@ -30,6 +32,7 @@ export const requestSchema = z.object({
     .max(8)
     .default([]),
   previousReplies: z.array(z.string().max(1200)).max(3).default([]),
+  learningExamples: z.array(exampleHintSchema).max(2).default([]),
 });
 const reply = z.object({
   text: z.string().trim().min(1).max(1200),
@@ -53,6 +56,18 @@ export const resultSchema = z.discriminatedUnion("status", [
     replies: z.object({ safe: reply, bold: reply, risky: reply }),
   }),
   z.object({ status: z.literal("boundary"), message: text }),
+  z.object({
+    status: z.literal("draft_check"),
+    summary: text,
+    confidence: z.enum(["low", "medium", "high"]),
+    risk: z.number().int().min(0).max(100),
+    bluntness: z.number().int().min(0).max(100),
+    sexualForwardness: z.number().int().min(0).max(100),
+    evidence: z.array(text).min(1).max(4),
+    missingContext: z.string().max(600),
+    recommendation: text,
+    rewrite: z.string().trim().min(1).max(1200),
+  }),
 ]);
 export type ReplyRequest = z.infer<typeof requestSchema>;
 export type AnalysisResult = z.infer<typeof resultSchema>;
