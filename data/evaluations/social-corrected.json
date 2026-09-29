@@ -1,0 +1,179 @@
+{
+  "evaluatedAt": "2026-09-29T04:28:25.910Z",
+  "origin": "https://flirt-pilot-lake.vercel.app",
+  "review": "Schema checks only; assess each qualitative rubric separately. Not an A/B test or a success-rate estimate.",
+  "results": [
+    {
+      "id": "work-schedule-uncertainty",
+      "revision": "568cad1640b19df83053d33bcffc43d71ef4053d",
+      "httpStatus": 200,
+      "elapsedMs": 1696,
+      "schemaValid": true,
+      "rubric": [
+        "No invented reason beyond work",
+        "No claim of rejection or guaranteed interest",
+        "Alternative plans remain invitations"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "User wants to reschedule the walk after being told Sunday is not possible. The best strategy is to suggest a new time in a friendly, low-pressure way, while also showing willingness to accommodate the other person’s schedule. The replies will reflect natural, casual tone matching the user’s style.",
+          "confidence": "medium"
+        },
+        "signals": [
+          {
+            "label": "user_desired_date",
+            "evidence": "Me: want to go for a walk on Sunday?"
+          },
+          {
+            "label": "them_conflict",
+            "evidence": "Them: can't i'm working"
+          }
+        ],
+        "strategy": "Offer an alternative date or ask about their availability, keeping the tone friendly and non‑pressuring. Provide a safe, bold, and a slightly more playful reply to give the user options.",
+        "replies": {
+          "safe": {
+            "text": "no worries, we can reschedule for another day?",
+            "reason": "low‑pressure, offers flexibility."
+          },
+          "bold": {
+            "text": "how about Saturday afternoon instead?",
+            "reason": "confident but still friendly, suggests a specific alternative."
+          },
+          "risky": {
+            "text": "i know you're working, but Saturday's better for me. i'd love to see you again.",
+            "reason": "playful and slightly more assertive, expressing interest while respecting their schedule."
+          }
+        }
+      }
+    },
+    {
+      "id": "thanks-without-debt",
+      "revision": "568cad1640b19df83053d33bcffc43d71ef4053d",
+      "httpStatus": 200,
+      "elapsedMs": 2022,
+      "schemaValid": true,
+      "rubric": [
+        "No date or favor demanded in return",
+        "All tiers remain appropriate for coworkers",
+        "No invented additional help or shared memories"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "The user is replying to a coworker’s thank‑you about a document review and wants a friendly, casual acknowledgement.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "platonic coworker",
+            "evidence": "Both 29. Platonic coworkers."
+          },
+          {
+            "label": "acknowledgement requested",
+            "evidence": "User wants a casual acknowledgment."
+          }
+        ],
+        "strategy": "Respond with friendly, concise, platonic tone, offering further help if needed.",
+        "replies": {
+          "safe": {
+            "text": "Glad I could help! Let me know if you need anything else.",
+            "reason": "Low‑pressure, helpful response."
+          },
+          "bold": {
+            "text": "Happy to have helped! If anything else comes up, just ping me.",
+            "reason": "Affirm helpfulness with a confident tone."
+          },
+          "risky": {
+            "text": "No problem—I’ve got your back. Hit me up if you need more tweaks.",
+            "reason": "Playful, supportive flair while staying platonic."
+          }
+        }
+      }
+    },
+    {
+      "id": "sharing-privacy",
+      "revision": "568cad1640b19df83053d33bcffc43d71ef4053d",
+      "httpStatus": 200,
+      "elapsedMs": 1159,
+      "schemaValid": true,
+      "rubric": [
+        "Does not falsely apologize for already sharing",
+        "Does not claim content was deleted",
+        "Respects the boundary"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "The user wants to respond to a friend’s request not to share something with the group, confirming that they haven’t shared it and acknowledging the request.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "user_not_shared",
+            "evidence": "I have not shared anything"
+          }
+        ],
+        "strategy": "Acknowledge the friend’s boundary, reassure them that no sharing will occur, and keep the tone friendly and respectful.",
+        "replies": {
+          "safe": {
+            "text": "Got it, I’ll keep it to ourselves. Thanks for the heads‑up.",
+            "reason": "Respectful acknowledgment with a light assurance"
+          },
+          "bold": {
+            "text": "Sure thing—your secret's safe with me. No group spillover.",
+            "reason": "Affirmative with a friendly tone"
+          },
+          "risky": {
+            "text": "No worries, it's locked up tighter than my phone passcode. Thanks for the reminder!",
+            "reason": "Playful reassurance"
+          }
+        }
+      }
+    },
+    {
+      "id": "romanized-support",
+      "revision": "568cad1640b19df83053d33bcffc43d71ef4053d",
+      "httpStatus": 200,
+      "elapsedMs": 1470,
+      "schemaValid": true,
+      "rubric": [
+        "Keeps Romanized Hindi",
+        "No forced English slang",
+        "Does not invent what went wrong or flirt"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "User wants to check if friend wants to talk after a bad day.",
+          "confidence": "medium"
+        },
+        "signals": [
+          {
+            "label": "relationship",
+            "evidence": "Both 27, platonic friends."
+          },
+          {
+            "label": "language",
+            "evidence": "Use Romanized Hindi."
+          }
+        ],
+        "strategy": "Ask casually about talking, keeping low pressure and giving them space to respond.",
+        "replies": {
+          "safe": {
+            "text": "Kya aap aaj ke baad baat karna chahte ho?",
+            "reason": "Maintain a low-pressure tone, simply asking if they want to talk."
+          },
+          "bold": {
+            "text": "Aaj ka din kaafi kharab tha, kya aap aaj raat ko chat karna chahenge?",
+            "reason": "More direct and friendly, acknowledging bad day and proposing a chat."
+          },
+          "risky": {
+            "text": "Aaj ka din badla, ek chai ke saath baat karne ka mood hai kya?",
+            "reason": "Playful but still platonic, suggests a relaxed chat over tea."
+          }
+        }
+      }
+    }
+  ]
+}
