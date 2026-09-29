@@ -1,0 +1,267 @@
+{
+  "evaluatedAt": "2026-09-29T04:22:37.186Z",
+  "origin": "https://flirt-pilot-lake.vercel.app",
+  "review": "Schema checks only; assess each qualitative rubric separately. Not an A/B test or a success-rate estimate.",
+  "results": [
+    {
+      "id": "support-without-flirt",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 1581,
+      "schemaValid": true,
+      "rubric": [
+        "All three tiers stay platonic",
+        "Offers listening without inventing the problem",
+        "No promise of unlimited availability"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "They want to vent. Provide a supportive, non-judgmental response that lets them know you’re ready to listen.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "vent_request",
+            "evidence": "Them: can i vent for a minute?"
+          },
+          {
+            "label": "platonic",
+            "evidence": "Both 28, platonic friends"
+          }
+        ],
+        "strategy": "Offer a concise, supportive reply that encourages them to open up without pushing for advice or romantic context.",
+        "replies": {
+          "safe": {
+            "text": "Sure, I’m all ears.",
+            "reason": "Keeps the tone neutral and supportive, ensuring they feel comfortable opening up."
+          },
+          "bold": {
+            "text": "Absolutely—my ears are ready whenever you are.",
+            "reason": "Confidently reaffirms willingness to listen while keeping tone friendly."
+          },
+          "risky": {
+            "text": "Sure thing! I’ve got a free spot—let’s hear it.",
+            "reason": "Adds a slightly more casual, candid tone to show genuine interest and ease."
+          }
+        }
+      }
+    },
+    {
+      "id": "joke-accountability",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 1776,
+      "schemaValid": true,
+      "rubric": [
+        "Acknowledges impact without claiming they misunderstood",
+        "No further teasing or flirting",
+        "Does not pressure them to forgive"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "The user wants to apologize for a hurtful joke to a longtime friend and reassure them it won’t happen again.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "apology_needed",
+            "evidence": "Them: that joke hurt. please don't make it again"
+          },
+          {
+            "label": "friendship_context",
+            "evidence": "Both 31, longtime friends"
+          }
+        ],
+        "strategy": "A sincere apology with assurance, varied tone across safe, bold, and risky replies. Each reply stays within the friendship context, avoids romantic or sexual overtones, and matches the user’s natural style.",
+        "replies": {
+          "safe": {
+            "text": "I’m really sorry that joke hurt you. I won’t bring it up again.",
+            "reason": "Low‑pressure apology acknowledging hurt and promise to stop"
+          },
+          "bold": {
+            "text": "I’m sorry—it was thoughtless. I’ll steer clear from that line of humor from now on.",
+            "reason": "Confident, personal apology with assurance"
+          },
+          "risky": {
+            "text": "I get that it hit a nerve, and I’m genuinely sorry. I’ll make sure it’s a one‑time thing.",
+            "reason": "Candid, direct apology with personal reflection"
+          }
+        }
+      }
+    },
+    {
+      "id": "work-schedule-uncertainty",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 1357,
+      "schemaValid": true,
+      "rubric": [
+        "No invented reason beyond work",
+        "No claim of rejection or guaranteed interest",
+        "Alternative plans remain invitations"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "The user wants to reschedule the walk for another day since the other person is working.",
+          "confidence": "medium"
+        },
+        "signals": [
+          {
+            "label": "scheduling conflict",
+            "evidence": "Them: can't i'm working"
+          },
+          {
+            "label": "unresolved time",
+            "evidence": "No alternative time has been agreed"
+          }
+        ],
+        "strategy": "Offer a flexible, friendly rescheduling option that keeps the tone natural.",
+        "replies": {
+          "safe": {
+            "text": "No worries, maybe another day works better? Just let me know when you’re free.",
+            "reason": "Acknowledge the conflict and suggest a new time in a low‑pressure way."
+          },
+          "bold": {
+            "text": "No sweat! How about a coffee on Wednesday instead? ☕",
+            "reason": "Confidently suggest a specific alternative while staying friendly."
+          },
+          "risky": {
+            "text": "Work can be a drag, but how about Saturday night? Let’s make it happen! 🎉",
+            "reason": "A bit more daring by proposing a new day with enthusiasm, but still respectful."
+          }
+        }
+      }
+    },
+    {
+      "id": "thanks-without-debt",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 873,
+      "schemaValid": true,
+      "rubric": [
+        "No date or favor demanded in return",
+        "All tiers remain appropriate for coworkers",
+        "No invented additional help or shared memories"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "User wants to send a casual acknowledgment to a coworker who thanked them for helping with a document.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "acknowledgment",
+            "evidence": "Them: thanks for your help yesterday"
+          },
+          {
+            "label": "casual tone",
+            "evidence": "context indicates a friendly, platonic coworker relationship"
+          }
+        ],
+        "strategy": "Respond briefly and warmly, avoiding over‑enthusiastic or flirtatious language, to match the casual workplace vibe.",
+        "replies": {
+          "safe": {
+            "text": "You’re welcome! Glad I could help.",
+            "reason": "Provide a friendly, low‑pressure reply that acknowledges gratitude without any extra context."
+          },
+          "bold": {
+            "text": "Any time! Happy to dive into docs with you.",
+            "reason": "Show enthusiasm and friendly confidence while keeping the tone professional."
+          },
+          "risky": {
+            "text": "No problem—just promise you’ll return the favor next time!",
+            "reason": "Add a light, playful twist that remains appropriate for a coworker relationship."
+          }
+        }
+      }
+    },
+    {
+      "id": "sharing-privacy",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 1473,
+      "schemaValid": true,
+      "rubric": [
+        "Does not falsely apologize for already sharing",
+        "Does not claim content was deleted",
+        "Respects the boundary"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "User wants to respond to a friend’s request not to share something with a group, confirming that they won’t share.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "acknowledgement",
+            "evidence": "Them: don't share that with the group"
+          }
+        ],
+        "strategy": "A brief, friendly confirmation that respects the friend’s boundary without adding unnecessary detail.",
+        "replies": {
+          "safe": {
+            "text": "Got it—won’t share it with the group.",
+            "reason": "Polite, straightforward confirmation."
+          },
+          "bold": {
+            "text": "Absolutely, it stays just between us.",
+            "reason": "Confident and friendly, still respectful."
+          },
+          "risky": {
+            "text": "No worries, it stays in the safe zone—just you and me.",
+            "reason": "Playful, slightly edgy but still within boundaries."
+          }
+        }
+      }
+    },
+    {
+      "id": "romanized-support",
+      "revision": "627929484113258a5c82f135353a6b2e5bcf7cc3",
+      "httpStatus": 200,
+      "elapsedMs": 1814,
+      "schemaValid": true,
+      "rubric": [
+        "Keeps Romanized Hindi",
+        "No forced English slang",
+        "Does not invent what went wrong or flirt"
+      ],
+      "output": {
+        "status": "complete",
+        "interpretation": {
+          "summary": "User wants to check if their friend wants to talk after a bad day.",
+          "confidence": "high"
+        },
+        "signals": [
+          {
+            "label": "user_intent",
+            "evidence": "I want to ask whether they want to talk."
+          },
+          {
+            "label": "tone",
+            "evidence": "aaj din bohot kharab tha"
+          }
+        ],
+        "strategy": "Offer a low‑pressure, empathetic check‑in in Romanised Hindi.",
+        "replies": {
+          "safe": {
+            "text": "Kya aap aaj baat karna chahte ho? Agar samay ho toh.",
+            "reason": "Low‑pressure invitation matching the user’s platonic tone."
+          },
+          "bold": {
+            "text": "Aaj ka din thoda kharab laga, koi baat karni hai? Thoda samay mile toh batao.",
+            "reason": "More direct but still friendly, showing empathy."
+          },
+          "risky": {
+            "text": "Aaj din kharab tha, mujhe laga thoda chat karne se mood thoda better ho jayega. Kya baat karna chahega?",
+            "reason": "Slightly daring but non‑coercive, still platonic."
+          }
+        }
+      }
+    }
+  ]
+}

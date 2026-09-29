@@ -19,6 +19,8 @@ This implements the user's supplied public/ethical dataset research as a **refer
 
 ## Exact artifact layers
 
+This release downloaded **6,772 conversations in 22,502,841 bytes** of source files and documentation. The strict parser normalized **6,744 conversations / 90,826 turns** into the local quarantine and rejected **28** malformed/unsupported records. These counts are not approved training-example counts; only the **24** separate rewritten additions enter the 47-example runtime library.
+
 - `social-reference.json`: 24 agent-reviewed, rewritten adult examples, with source name, zero-based source row and original source ID. PersonaConflicts IDs repeat; the row index and snapshot hash disambiguate them. The legacy 23 examples and six slang terms remain.
 - `public-corpus-audit.json`: exact source URLs, SHA-256 hashes, byte sizes, row/turn counts and rejected records. Hashes are of downloaded bytes; upstream changes require explicit re-review.
 - `work/public-corpus-quarantine.jsonl`: normalized synthetic source material, **not approved for training or production**. All records retain that status even when character profiles are adults. No runtime module imports it.

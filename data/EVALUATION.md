@@ -1,5 +1,13 @@
 # Chat reference development evaluation — September 28, 2026
 
+## Social-reference expansion
+
+Six new synthetic cases were run on the baseline `18e3912` and the 47-reference version `6279294`. `evaluations/social-baseline.json` and `evaluations/social-expanded.json` retain complete outputs. All twelve requests passed schema validation. These are one-shot development comparisons, not a statistical quality benchmark or independent human evaluation.
+
+The expanded version gave a shorter supportive reply and more focused apologies without an unsolicited meetup. Both versions respected the sharing boundary without falsely claiming content was deleted. However, the expanded coworker-gratitude result asked for a returned favor in its risky card, contrary to its reference lesson. Scheduling still introduced unsupported candidate days and enthusiastic pressure. Romanized Hindi stayed in Latin script but became awkward/formal; that case matches no English reference, so differences illustrate generation variability rather than dataset benefit.
+
+The failure exposed conflicting tier instructions: the previous cloud prompt defined Bold as always flirty. Follow-up instructions now define tiers by delivery while preserving the user's goal, keep all platonic tiers platonic, forbid repayment demands in gratitude responses, and require supplied availability before proposing a specific day/time. The local prompt follows the same rules. These are prompt constraints, not deterministic output guarantees. Subsequent results must be assessed separately; no overall accuracy gain is claimed.
+
 The 23-example library is deployed as conditional guidance, **not fine-tuning**. All 3,511 source records were structurally audited, but only the selected situations were adapted for use. No source persona or raw assistant response was imported.
 
 ## What was tested
