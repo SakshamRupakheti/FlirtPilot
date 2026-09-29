@@ -1,5 +1,9 @@
 # Reviewed language reference
 
+## Multi-source expansion (September 28, 2026)
+
+The active reference library now includes 47 situations: the original 23 below plus 24 reviewed adaptations from SODA and PersonaConflicts in `social-reference.json`. See [DATASET_CATALOG.md](DATASET_CATALOG.md) for source decisions and reproducible downloads; `public-corpus-audit.json` records exact volumes, hashes and structural rejections. Only selected rewritten examples enter prompts; all normalized raw records remain quarantined. This is not model training or a measured improvement in accuracy.
+
 ## Curated chat situations (September 28, 2026)
 
 See `EVALUATION.md` and `evaluations/` for the completed development runs, remaining quality failures, and the decision to retain the faster 20B model after a 120B trial. These cases were used during development and are not an independent benchmark.

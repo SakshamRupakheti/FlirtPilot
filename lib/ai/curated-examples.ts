@@ -1,4 +1,5 @@
 import library from "../../data/curated-chat.json";
+import socialLibrary from "../../data/social-reference.json";
 import type { ReplyRequest } from "./schema";
 
 export function selectPublicExamples(
@@ -9,7 +10,7 @@ export function selectPublicExamples(
     .replace(/[’‘]/g, "'")
     .replace(/[^a-z0-9'\s]/g, " ")
     .replace(/\s+/g, " ")} `;
-  return library.examples
+  return [...library.examples, ...socialLibrary.examples]
     .map((example) => ({
       example,
       score: example.triggers.filter((phrase) => text.includes(` ${phrase} `))

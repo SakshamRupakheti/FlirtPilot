@@ -1,10 +1,35 @@
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
+import { z } from "zod";
 import cases from "../data/chat-evaluation.json";
 import { requestSchema, resultSchema } from "../lib/ai/schema";
 
 // Explicitly run against your app: tsx scripts/evaluate-public-chat.ts URL report.json
 // Sends only the checked-in synthetic test cases. No local chats or secrets read.
-const [base, output, startAt = "0"] = process.argv.slice(2);
+const [base, output, startAt = "0", suite = "chat"] = process.argv.slice(2);
+if (!["chat", "social"].includes(suite))
+  throw new Error("Suite must be chat or social.");
+const selectedCases =
+  suite === "social"
+    ? z
+        .object({
+          cases: z.array(
+            z.object({
+              id: z.string(),
+              message: z.string(),
+              context: z.string(),
+              checks: z.array(z.string()),
+            }),
+          ),
+        })
+        .parse(
+          JSON.parse(
+            readFileSync(
+              new URL("../data/social-evaluation.json", import.meta.url),
+              "utf8",
+            ),
+          ),
+        )
+    : cases;
 if (!base || !output) throw new Error("Supply an app origin and report path.");
 const url = new URL("/api/reply", base);
 if (
@@ -14,9 +39,13 @@ if (
   throw new Error("Use HTTPS or a loopback app.");
 const results = [];
 const offset = Number(startAt);
-if (!Number.isInteger(offset) || offset < 0 || offset >= cases.cases.length)
+if (
+  !Number.isInteger(offset) ||
+  offset < 0 ||
+  offset >= selectedCases.cases.length
+)
   throw new Error("Optional start index must identify an evaluation case.");
-for (const [index, sample] of cases.cases.slice(offset).entries()) {
+for (const [index, sample] of selectedCases.cases.slice(offset).entries()) {
   // Pace free-tier requests; this is not a quota bypass. Stop on any error.
   if (index > 0) await new Promise((resolve) => setTimeout(resolve, 30000));
   const started = Date.now();
