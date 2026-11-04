@@ -28,6 +28,8 @@ Local mode runs a downloaded model on your computer with no per-request API fees
 
 ## Development
 
+The optional [iPhone keyboard development preview](ios/README.md) adds local word suggestions and a shorter authenticated AI endpoint. It is native source, not yet a signed/installable iPhone app. Building it requires macOS/Xcode or a configured macOS build service; the Windows web workflow below remains unchanged.
+
 ```sh
 npm run lint
 npm run typecheck
@@ -38,3 +40,7 @@ npm run build
 Built with TypeScript, React, Next.js App Router APIs, Tailwind and shadcn/Radix. Vinext provides the Vite/Cloudflare Worker deployment runtime. GitHub Pages alone cannot execute the server AI endpoint.
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture, environment settings, privacy decisions, validation limits and the remaining MVP phases. Local mode is for this computer; a publicly hosted site cannot automatically use your laptop's model. The full MVP is not yet complete.
+
+## License
+
+Original source code in this repository is licensed under the [MIT license](LICENSE). Third-party libraries, models, datasets, and assets retain their own licenses and attribution.

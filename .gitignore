@@ -47,3 +47,6 @@ next-env.d.ts
 
 !.env.example
 *.tsbuildinfo
+/ios/Generated/
+/ios/*.xcodeproj/
+/ios/DerivedData/

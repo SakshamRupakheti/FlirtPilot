@@ -1,0 +1,19 @@
+name: Validate iPhone keyboard (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  simulator-build:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        working-directory: ios
+        run: xcodegen generate
+      - name: Build unsigned app and keyboard for simulator
+        working-directory: ios
+        run: xcodebuild -project FlirtPilot.xcodeproj -scheme FlirtPilot -sdk iphonesimulator -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build

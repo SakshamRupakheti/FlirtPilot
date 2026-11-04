@@ -1,5 +1,7 @@
 # FlirtPilot: agent handoff
 
+September 25 update: the user requested iPhone 14 keyboard work despite having no Mac. See `ios/README.md` and the `feat/iphone-keyboard` branch for native source, optional authenticated short AI requests and pending macOS/device verification. The original September 21 inventory below describes the web baseline. Existing web UI is preserved. Do not treat the iOS source as an installed app or assume phone access to the laptop's localhost.
+
 Prepared September 21, 2026. Read this and DEVELOPMENT.md before making changes. This document contains no secrets.
 
 ## Repository and checkout

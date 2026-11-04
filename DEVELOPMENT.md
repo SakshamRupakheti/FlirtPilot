@@ -2,6 +2,8 @@
 
 ## Scope and status
 
+September 25 update: the user explicitly brought the iPhone keyboard forward from the future-feature list. `ios/` contains a native companion app/keyboard development preview; Swift compilation and physical iPhone installation are not verified on this Windows machine. It provides local dictionary word suggestions and optional manual AI requests through the new authenticated `/api/keyboard` short-output route. See `ios/README.md` for build/signing constraints, privacy, server setup and pending device QA. The original web Reply path/UI is unchanged; this does not complete the remaining web MVP phases.
+
 This branch implements Phase 1 and Phase 2. Later phases are intentionally not started. The full nine-phase MVP is **not complete**.
 
 Phase 1: original dark wine/pink responsive landing page, interactive examples, six-mode overview, accessible adult gate, metadata and favicon. Reply is enabled. Decode, Revive, Start, Reconnect and Practice are visibly marked as upcoming rather than linking to unfinished pages.
