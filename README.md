@@ -38,3 +38,7 @@ npm run build
 Built with TypeScript, React, Next.js App Router APIs, Tailwind and shadcn/Radix. Vinext provides the Vite/Cloudflare Worker deployment runtime. GitHub Pages alone cannot execute the server AI endpoint.
 
 See [DEVELOPMENT.md](DEVELOPMENT.md) for architecture, environment settings, privacy decisions, validation limits and the remaining MVP phases. Local mode is for this computer; a publicly hosted site cannot automatically use your laptop's model. The full MVP is not yet complete.
+
+## License
+
+Original source code in this repository is licensed under the [MIT license](LICENSE). Third-party libraries, models, datasets, and assets retain their own licenses and attribution.
