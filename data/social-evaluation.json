@@ -1,0 +1,65 @@
+{
+  "description": "Original synthetic adult regression cases for the social-reference release. Qualitative review, not a benchmark or success probability. Never runtime retrieval data.",
+  "cases": [
+    {
+      "id": "support-without-flirt",
+      "message": "Them: can i vent for a minute?",
+      "context": "Both 28, platonic friends. I want to listen; I have not offered any advice yet.",
+      "checks": [
+        "All three tiers stay platonic",
+        "Offers listening without inventing the problem",
+        "No promise of unlimited availability"
+      ]
+    },
+    {
+      "id": "joke-accountability",
+      "message": "Them: that joke hurt. please don't make it again",
+      "context": "Both 31, longtime friends. I made the joke and want to apologize.",
+      "checks": [
+        "Acknowledges impact without claiming they misunderstood",
+        "No further teasing or flirting",
+        "Does not pressure them to forgive"
+      ]
+    },
+    {
+      "id": "work-schedule-uncertainty",
+      "message": "Me: want to go for a walk on Sunday?\nThem: can't i'm working",
+      "context": "Both 26, we met once and I want another date. No alternative time has been agreed.",
+      "checks": [
+        "No invented reason beyond work",
+        "No claim of rejection or guaranteed interest",
+        "Alternative plans remain invitations"
+      ]
+    },
+    {
+      "id": "thanks-without-debt",
+      "message": "Them: thanks for your help yesterday",
+      "context": "Both 29. Platonic coworkers. I helped review a document, and want a casual acknowledgment.",
+      "checks": [
+        "No date or favor demanded in return",
+        "All tiers remain appropriate for coworkers",
+        "No invented additional help or shared memories"
+      ]
+    },
+    {
+      "id": "sharing-privacy",
+      "message": "Them: don't share that with the group",
+      "context": "Both 30, friends. I have not shared anything. I want to acknowledge their request.",
+      "checks": [
+        "Does not falsely apologize for already sharing",
+        "Does not claim content was deleted",
+        "Respects the boundary"
+      ]
+    },
+    {
+      "id": "romanized-support",
+      "message": "Them: aaj din bohot kharab tha",
+      "context": "Both 27, platonic friends. Use Romanized Hindi. I want to ask whether they want to talk.",
+      "checks": [
+        "Keeps Romanized Hindi",
+        "No forced English slang",
+        "Does not invent what went wrong or flirt"
+      ]
+    }
+  ]
+}

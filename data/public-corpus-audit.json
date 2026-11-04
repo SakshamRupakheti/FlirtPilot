@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-09-28",
+  "snapshots": [
+    {
+      "path": "work/soda-rows-0.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=0&length=100",
+      "sha256": "6747ed72fa05eec19f3b83456bc5275495d314803ef9c47b33d56a41fd8d70fc",
+      "bytes": 144147
+    },
+    {
+      "path": "work/soda-rows-100.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=100&length=100",
+      "sha256": "711cbb2b7e85063bfb2a5d9311f03dc644d5de52a5727c5fe0b2330e25fb6cf8",
+      "bytes": 135312
+    },
+    {
+      "path": "work/soda-rows-1000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=1000&length=100",
+      "sha256": "ab6c27c67d0e6f64fd7bb6192902b1cc2ab00721c27d3e0af0c6289a61e91ae1",
+      "bytes": 131181
+    },
+    {
+      "path": "work/soda-rows-10000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=10000&length=100",
+      "sha256": "d8f798e9422c2bf30e939855222c097a22767596229f365b47b35ff80c35da47",
+      "bytes": 133228
+    },
+    {
+      "path": "work/soda-rows-100000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=100000&length=100",
+      "sha256": "d5e6c39b50cf472be7445d1d5bbf72d553e3b09d04a94e8a4205a1d68edd6a79",
+      "bytes": 138321
+    },
+    {
+      "path": "work/soda-rows-200000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=200000&length=100",
+      "sha256": "19876307e3dafae090606b2acf0c6afb941331cf52978256ab348ca959f47d32",
+      "bytes": 137624
+    },
+    {
+      "path": "work/soda-rows-400000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=400000&length=100",
+      "sha256": "8a0e7fd66e7c6f7ca1984e55d24b2cf2933a546479a22feb63e3f3679d2fc988",
+      "bytes": 134074
+    },
+    {
+      "path": "work/soda-rows-600000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=600000&length=100",
+      "sha256": "babc71673afa567bb4fe40ddaa53873adb338c0c07189efb1240191f2b9a40a0",
+      "bytes": 134876
+    },
+    {
+      "path": "work/soda-rows-800000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=800000&length=100",
+      "sha256": "013ac0442983ab80f91854e24c5520d9d5ee4af61277fa47f3cca01e8aa203e1",
+      "bytes": 132159
+    },
+    {
+      "path": "work/soda-rows-1000000.json",
+      "url": "https://datasets-server.huggingface.co/rows?dataset=allenai%2Fsoda&config=default&split=train&offset=1000000&length=100",
+      "sha256": "77cf485fdbe47eb98f28294288eecacb32c721ec3773b30431f4a89ed569ca15",
+      "bytes": 139721
+    },
+    {
+      "path": "work/soda-README.md",
+      "url": "https://huggingface.co/datasets/allenai/soda/raw/main/README.md",
+      "sha256": "e5a7c0a627d64ddcb65c6a40a12065349564094f7362591752b781101fcd420a",
+      "bytes": 4915
+    },
+    {
+      "path": "work/persona-conflicts.csv",
+      "url": "https://raw.githubusercontent.com/mitmedialab/persona-conflicts-corpus-emnlp-2025/main/dataset_final.csv",
+      "sha256": "580a88a048b496c8e48dfa14afcc75a6f930789494a83bd52fcd01d197c28733",
+      "bytes": 21121884
+    },
+    {
+      "path": "work/persona-profiles.csv",
+      "url": "https://raw.githubusercontent.com/mitmedialab/persona-conflicts-corpus-emnlp-2025/main/sotopia_agent_profiles.csv",
+      "sha256": "483b6ba8f981a04d739c04b90bbfcb114a1abc3589145eb7ebb5f75ca4c730dd",
+      "bytes": 14329
+    },
+    {
+      "path": "work/persona-conflicts-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/mitmedialab/persona-conflicts-corpus-emnlp-2025/main/LICENSE",
+      "sha256": "23502e29ae733fea37723bd0cff1a1a7dd28abc848354ac9eb01db204ce3f80a",
+      "bytes": 1070
+    }
+  ],
+  "counts": {
+    "sodaDownloaded": 1000,
+    "sodaNormalized": 997,
+    "personaDownloaded": 5772,
+    "personaNormalized": 5747,
+    "normalizedTotal": 6744,
+    "normalizedTurns": 90826,
+    "syntheticProfiles18Plus": 5747,
+    "reviewedAdaptations": 24,
+    "rejected": 28
+  },
+  "rejected": [
+    {
+      "source": "soda",
+      "row": 200062,
+      "reason": "truncated-or-speaker-turn-mismatch"
+    },
+    {
+      "source": "soda",
+      "row": 600085,
+      "reason": "truncated-or-speaker-turn-mismatch"
+    },
+    {
+      "source": "soda",
+      "row": 800033,
+      "reason": "truncated-or-speaker-turn-mismatch"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 253,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 419,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 467,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 1016,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 1476,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 1626,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 1884,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 1927,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2000,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2034,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2109,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2155,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2260,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2310,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2416,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2677,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2901,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 2943,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 3399,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 3999,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 4523,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 4540,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 4778,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 5343,
+      "reason": "invalid-turns"
+    },
+    {
+      "source": "persona-conflicts",
+      "row": 5617,
+      "reason": "invalid-turns"
+    }
+  ],
+  "normalizedSha256": "eaeade475e3172ac068d3a6fd2fce44f120c35b4d852a3c15bd88441d8283291",
+  "normalizedBytes": 10755900,
+  "limitations": [
+    "Structural validation is not a quality, consent, or safety review.",
+    "All normalized raw records remain quarantined, including records with adult synthetic profiles.",
+    "SODA sample is deterministic and nonrandom; not the full 1.49M corpus.",
+    "Only separately reviewed rewritten adaptations enter runtime prompts. No training was run."
+  ]
+}

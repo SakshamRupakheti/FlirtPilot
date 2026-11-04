@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "reviewedOn": "2026-09-28",
+  "reviewer": "Codex (agent review; not independent human annotation)",
+  "adaptation": "New fictional adult situations and replies adapted from source themes. Source dialogue is not a preferred reply. No claim of source participant ages, romantic success, or measured quality gain.",
+  "examples": [
+    {
+      "id": "soda-listening",
+      "source": "soda",
+      "sourceRow": 1,
+      "sourceId": 6027739,
+      "sourcePrompt": "An adult friend says several things are going wrong and asks to talk.",
+      "triggers": [
+        "need someone to talk to",
+        "everything is going wrong",
+        "can i vent"
+      ],
+      "lesson": "Acknowledge what they said and offer listening before advice. Do not use vulnerability to flirt or promise to solve everything.",
+      "reply": "I'm here. Want to vent, or talk through one thing at a time?",
+      "category": "support"
+    },
+    {
+      "id": "soda-work-rut",
+      "source": "soda",
+      "sourceRow": 29,
+      "sourceId": 6027895,
+      "sourcePrompt": "An adult friend feels stuck at work.",
+      "triggers": ["stuck at work", "stuck in my job", "stuck in a rut"],
+      "lesson": "Reflect their frustration without inventing a diagnosis or pushing a major life decision. Ask one easy question.",
+      "reply": "That sounds frustrating. What's been the hardest part lately?",
+      "category": "support"
+    },
+    {
+      "id": "soda-celebrate",
+      "source": "soda",
+      "sourceRow": 58,
+      "sourceId": 6028080,
+      "sourcePrompt": "An adult friend shares progress on a creative project.",
+      "triggers": [
+        "hard work paid off",
+        "finally finished my project",
+        "proud of my work"
+      ],
+      "lesson": "Celebrate the actual achievement they named. Do not invent years of effort or claim to have seen work they have not shown.",
+      "reply": "That's worth celebrating. What part are you happiest with?",
+      "category": "rapport"
+    },
+    {
+      "id": "soda-long-day",
+      "source": "soda",
+      "sourceRow": 60,
+      "sourceId": 6028094,
+      "sourcePrompt": "An adult friend says they are tired after a long day.",
+      "triggers": ["been a long day", "just tired", "exhausted today"],
+      "lesson": "Accept their explanation instead of insisting something is secretly wrong. Offer company without demanding engagement.",
+      "reply": "Want to talk about it, or call it a night?",
+      "category": "support"
+    },
+    {
+      "id": "soda-thanks-help",
+      "source": "soda",
+      "sourceRow": 72,
+      "sourceId": 6028165,
+      "sourcePrompt": "An adult friend thanks the user for helping with a shared task.",
+      "triggers": [
+        "thanks for helping me",
+        "thanks for your help",
+        "appreciate your help"
+      ],
+      "lesson": "Accept thanks briefly. Helping creates no debt of affection, attention, or a date.",
+      "reply": "Of course, glad I could help.",
+      "category": "rapport"
+    },
+    {
+      "id": "soda-small-talk",
+      "source": "soda",
+      "sourceRow": 90,
+      "sourceId": 6028242,
+      "sourcePrompt": "Two adult friends are repeating small talk without adding a topic.",
+      "triggers": ["same old same old", "nothing much hbu", "nm hbu"],
+      "lesson": "Offer one easy topic or a true detail supplied by the user. Do not invent their activities or force romantic escalation.",
+      "reply": "Anything you're looking forward to this week?",
+      "category": "rapport"
+    },
+    {
+      "id": "soda-moving",
+      "source": "soda",
+      "sourceRow": 91,
+      "sourceId": 6028247,
+      "sourcePrompt": "An adult friend is considering moving and feels both excited and unsure.",
+      "triggers": [
+        "thinking about moving",
+        "move to a new city",
+        "ready for a change"
+      ],
+      "lesson": "Leave room for mixed feelings and ask what appeals to them. Do not decide for them or assume they are unhappy with the user.",
+      "reply": "Big change. What draws you there?",
+      "category": "support"
+    },
+    {
+      "id": "soda-bad-party",
+      "source": "soda",
+      "sourceRow": 107,
+      "sourceId": 6028354,
+      "sourcePrompt": "An adult friend says a social event was disappointing.",
+      "triggers": [
+        "party was awful",
+        "terrible time at that party",
+        "didn't enjoy the party"
+      ],
+      "lesson": "Acknowledge their experience without blaming them or claiming the user would have made it better.",
+      "reply": "Ah, that's disappointing. What made it so bad?",
+      "category": "rapport"
+    },
+    {
+      "id": "soda-new-job",
+      "source": "soda",
+      "sourceRow": 109,
+      "sourceId": 6028359,
+      "sourcePrompt": "An adult friend mentions a new job during casual conversation.",
+      "triggers": [
+        "got a new job",
+        "started a new job",
+        "first day at my new job"
+      ],
+      "lesson": "Ask about the news they actually shared. Avoid assumptions about pay, success, or whether they enjoy it.",
+      "reply": "Congrats! How's it been so far?",
+      "category": "rapport"
+    },
+    {
+      "id": "soda-work-schedule",
+      "source": "soda",
+      "sourceRow": 800041,
+      "sourceId": 4038178,
+      "sourcePrompt": "An adult friend cannot join plans because they are working.",
+      "triggers": [
+        "have to work today",
+        "working that day",
+        "can't i'm working"
+      ],
+      "lesson": "Treat the stated scheduling conflict as a scheduling conflict. Another time is an option, not an obligation or an already agreed plan.",
+      "reply": "No worries. Want to find another time?",
+      "category": "plans"
+    },
+    {
+      "id": "soda-feeling-better",
+      "source": "soda",
+      "sourceRow": 800083,
+      "sourceId": 4038485,
+      "sourcePrompt": "An adult friend says they are feeling better after a difficult period.",
+      "triggers": [
+        "feeling a lot better",
+        "starting to feel better",
+        "finally feeling better"
+      ],
+      "lesson": "Recognize their update without claiming they are fully recovered or attributing their progress to the user.",
+      "reply": "I'm glad to hear that. How's today been?",
+      "category": "support"
+    },
+    {
+      "id": "soda-lonely-move",
+      "source": "soda",
+      "sourceRow": 800095,
+      "sourceId": 4038547,
+      "sourcePrompt": "An adult friend feels lonely after moving away.",
+      "triggers": [
+        "lonely since i moved",
+        "miss my old friends",
+        "don't know anyone here"
+      ],
+      "lesson": "Acknowledge missing familiar people. Offer connection without making promises about availability or treating loneliness as romantic interest.",
+      "reply": "That sounds lonely. Want to catch up sometime?",
+      "category": "support"
+    },
+    {
+      "id": "persona-shared-space",
+      "source": "persona-conflicts",
+      "sourceRow": 0,
+      "sourceId": "0",
+      "sourcePrompt": "Two adult partners disagree about keeping their shared space tidy.",
+      "triggers": ["clean up after yourself", "shared space", "leaving a mess"],
+      "lesson": "Ask for a specific behavior without calling the person lazy or controlling. Do not infer a personality flaw from one disagreement.",
+      "reply": "Can we agree on how to keep the shared space tidy?",
+      "category": "repair"
+    },
+    {
+      "id": "persona-feedback",
+      "source": "persona-conflicts",
+      "sourceRow": 1,
+      "sourceId": "1",
+      "sourcePrompt": "An adult partner feels unheard when they raise a concern.",
+      "triggers": ["you get defensive", "feel unheard", "not listening to me"],
+      "lesson": "Acknowledge the concern before explaining intent. Ask what was missed without demanding proof or agreeing to an unsupported accusation.",
+      "reply": "I want to understand. What do you feel I'm missing?",
+      "category": "repair"
+    },
+    {
+      "id": "persona-hurtful-joke",
+      "source": "persona-conflicts",
+      "sourceRow": 9,
+      "sourceId": "9",
+      "sourcePrompt": "An adult friend says the user's joke hurt them.",
+      "triggers": [
+        "that joke hurt",
+        "joke wasn't funny",
+        "stop making fun of me"
+      ],
+      "lesson": "When the user made the hurtful joke, acknowledge its impact and stop. Do not double down on teasing or insist they are too sensitive.",
+      "reply": "I'm sorry, that wasn't fair to you. I'll stop.",
+      "category": "boundary"
+    },
+    {
+      "id": "persona-sharing-boundary",
+      "source": "persona-conflicts",
+      "sourceRow": 10,
+      "sourceId": "10",
+      "sourcePrompt": "An adult friend objects to the user sharing material without permission.",
+      "triggers": [
+        "shared without asking",
+        "don't share that",
+        "without my permission"
+      ],
+      "lesson": "Respect the sharing boundary. If the user shared it, acknowledge that and offer a truthful repair; never falsely claim deletion already happened.",
+      "reply": "You're right, I should've asked first. I won't share it again.",
+      "category": "boundary"
+    },
+    {
+      "id": "persona-unappreciated",
+      "source": "persona-conflicts",
+      "sourceRow": 24,
+      "sourceId": "24",
+      "sourcePrompt": "An adult partner says their help was not appreciated.",
+      "triggers": [
+        "feel unappreciated",
+        "never say thank you",
+        "don't appreciate what i do"
+      ],
+      "lesson": "Recognize the specific effort when known. Gratitude does not require accepting guilt, control, or an obligation to reciprocate affection.",
+      "reply": "Thank you for helping. I don't want that effort to go unnoticed.",
+      "category": "repair"
+    },
+    {
+      "id": "persona-heated-chat",
+      "source": "persona-conflicts",
+      "sourceRow": 35,
+      "sourceId": "35",
+      "sourcePrompt": "An argument between adult friends is becoming heated.",
+      "triggers": ["stop yelling", "getting heated", "too angry to talk"],
+      "lesson": "Offer a pause without threats or silent-treatment tactics. Do not force an immediate resolution or invent a time both have accepted.",
+      "reply": "Let's take a breather and come back to this when we're calmer.",
+      "category": "repair"
+    },
+    {
+      "id": "persona-left-out",
+      "source": "persona-conflicts",
+      "sourceRow": 36,
+      "sourceId": "36",
+      "sourcePrompt": "An adult feels left out of a decision about group plans.",
+      "triggers": [
+        "decided without me",
+        "left out of the plans",
+        "didn't ask me first"
+      ],
+      "lesson": "Acknowledge being left out without inventing malicious motives or claiming the user can change the group's decision alone.",
+      "reply": "I get why being left out felt bad. What would work for you?",
+      "category": "repair"
+    },
+    {
+      "id": "persona-creative-feedback",
+      "source": "persona-conflicts",
+      "sourceRow": 39,
+      "sourceId": "39",
+      "sourcePrompt": "An adult shares something they made and is unsure about receiving criticism.",
+      "triggers": [
+        "made this what do you think",
+        "feedback on my art",
+        "sharing my work"
+      ],
+      "lesson": "Ask whether they want encouragement or feedback. If the work is not visible, do not pretend to have evaluated its quality.",
+      "reply": "Want feedback, or are we celebrating that you made it?",
+      "category": "rapport"
+    },
+    {
+      "id": "persona-showing-up",
+      "source": "persona-conflicts",
+      "sourceRow": 41,
+      "sourceId": "41",
+      "sourcePrompt": "An adult friend says they did not feel supported during a hard time.",
+      "triggers": [
+        "weren't there for me",
+        "needed your support",
+        "felt alone in this"
+      ],
+      "lesson": "Hear the hurt without making an unlimited availability promise. Only apologize for actions the user confirms; ask what support would help.",
+      "reply": "I hear you. What kind of support would help right now?",
+      "category": "support"
+    },
+    {
+      "id": "persona-repeated-request",
+      "source": "persona-conflicts",
+      "sourceRow": 54,
+      "sourceId": "54",
+      "sourcePrompt": "An adult friend repeats a request to stop an upsetting behavior.",
+      "triggers": [
+        "asked you before",
+        "keep doing it after i asked",
+        "already asked you to stop"
+      ],
+      "lesson": "A repeated boundary needs a change in behavior, not a clever comeback. Identify who is being asked to stop before suggesting an apology.",
+      "reply": "I understand. I'll respect that boundary.",
+      "category": "boundary"
+    },
+    {
+      "id": "persona-distance",
+      "source": "persona-conflicts",
+      "sourceRow": 64,
+      "sourceId": "64",
+      "sourcePrompt": "An adult partner describes a pattern of feeling disconnected.",
+      "triggers": [
+        "feel disconnected",
+        "we've been distant",
+        "we feel distant"
+      ],
+      "lesson": "Distinguish a reported pattern from a single dry message. Ask openly without diagnosing lost interest or demanding reassurance.",
+      "reply": "I'd like to understand. How have things felt for you?",
+      "category": "repair"
+    },
+    {
+      "id": "persona-quality-time",
+      "source": "persona-conflicts",
+      "sourceRow": 68,
+      "sourceId": "68",
+      "sourcePrompt": "Adult partners want more time together but have competing commitments.",
+      "triggers": [
+        "quality time together",
+        "barely spend time together",
+        "miss spending time with you"
+      ],
+      "lesson": "Make a specific invitation only when availability is known; otherwise ask about it. Do not frame work or other commitments as proof of rejection.",
+      "reply": "I'd like some time together. When would work for you?",
+      "category": "plans"
+    }
+  ]
+}

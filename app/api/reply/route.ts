@@ -1,15 +1,27 @@
 import { requestSchema } from "@/lib/ai/schema";
 import { analyzeConversation } from "@/lib/ai/analyzeConversation";
 import { generateReplies } from "@/lib/ai/generateReplies";
-import { AIServiceError } from "@/lib/ai/provider";
+import { AIServiceError, callProvider } from "@/lib/ai/provider";
 import { allowRequest } from "@/lib/ai/rate-limit";
+import { isHostedPreview } from "@/lib/ai/deployment";
+export const maxDuration = 60;
 const headers = {
   "Cache-Control": "no-store",
   "X-Content-Type-Options": "nosniff",
+  "X-FlirtPilot-Revision":
+    process.env.VERCEL_GIT_COMMIT_SHA || "local-development",
 };
 const reply = (data: unknown, status = 200) =>
   Response.json(data, { status, headers });
 export async function POST(request: Request) {
+  if (isHostedPreview())
+    return reply(
+      {
+        error:
+          "Your wingman is waiting for its hosted AI connection. The app owner needs to finish server setup. No laptop connection is needed.",
+      },
+      503,
+    );
   const origin = request.headers.get("origin");
   if (origin && origin !== new URL(request.url).origin)
     return reply(
@@ -61,11 +73,23 @@ export async function POST(request: Request) {
         { error: "Confirm everyone is 18+ and check your message length." },
         400,
       );
+    if (parsed.data.action === "check" && !parsed.data.draft)
+      return reply({ error: "Add the reply you want to check." }, 400);
+    if (parsed.data.action === "check")
+      return reply(await callProvider(parsed.data));
     const result = await (
       parsed.data.action === "generate" ? generateReplies : analyzeConversation
     )(parsed.data);
     return reply(result);
   } catch (error) {
+    if (error instanceof AIServiceError && error.code === "FREE_LIMIT_REACHED")
+      return reply(
+        {
+          error:
+            "Our free AI allowance is resting. Try again later; your message is still here.",
+        },
+        429,
+      );
     if (error instanceof AIServiceError && error.code === "INPUT_TOO_LONG")
       return reply(
         {

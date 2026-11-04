@@ -8,6 +8,30 @@ const object = (properties: Record<string, unknown>) => ({
 });
 const array = (items: unknown) => ({ type: "array", items });
 const reply = object({ text: string, reason: string });
+const draftResult = object({
+  status: { type: "string", enum: ["draft_check"] },
+  summary: string,
+  confidence: { type: "string", enum: ["low", "medium", "high"] },
+  risk: { type: "integer" },
+  bluntness: { type: "integer" },
+  sexualForwardness: { type: "integer" },
+  evidence: array(string),
+  missingContext: string,
+  recommendation: string,
+  rewrite: string,
+});
+const boundaryResult = object({
+  status: { type: "string", enum: ["boundary"] },
+  message: string,
+});
+export const draftOutputFormat = {
+  type: "json_schema",
+  json_schema: {
+    name: "flirtpilot_draft_check",
+    strict: true,
+    schema: object({ result: { anyOf: [draftResult, boundaryResult] } }),
+  },
+};
 export const outputFormat = {
   type: "json_schema",
   json_schema: {

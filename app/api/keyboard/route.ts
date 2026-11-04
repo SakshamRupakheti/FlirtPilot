@@ -1,6 +1,7 @@
 import { keyboardRequest, suggestKeyboard } from "@/lib/ai/keyboard";
 import { allowRequest } from "@/lib/ai/rate-limit";
 import { AIServiceError } from "@/lib/ai/provider";
+export const maxDuration = 60;
 const reply = (body: unknown, status = 200) =>
   Response.json(body, {
     status,
@@ -11,6 +12,14 @@ const reply = (body: unknown, status = 200) =>
   });
 
 export async function POST(request: Request) {
+  if (process.env.VERCEL === "1")
+    return reply(
+      {
+        error:
+          "Phone AI needs a separately connected inference server. This deployment is a website preview.",
+      },
+      503,
+    );
   // Opt-in, separate device credential; never distribute an AI provider key.
   const token = process.env.KEYBOARD_ACCESS_TOKEN;
   if (!token || token.length < 32)

@@ -11,6 +11,7 @@ import {
   MessagesSquare,
   LockKeyhole,
   Check,
+  ShieldCheck,
 } from "lucide-react";
 import { AppShell } from "./shell";
 const examples = [
@@ -53,11 +54,13 @@ export function Landing() {
             </p>
             <div className="hero-actions">
               <Link className="primary" href="/reply">
-                Help me reply <ArrowRight size={18} />
+                <MessageCircle size={24} /> Help me reply{" "}
+                <ArrowRight size={18} />
               </Link>
-              <a className="secondary" href="#modes">
-                Decode a message <ScanText size={18} />
-              </a>
+              <Link className="secondary" href="/check">
+                <ShieldCheck size={24} /> Check my reply{" "}
+                <ArrowRight size={18} />
+              </Link>
             </div>
             <div className="trust">
               <span>
@@ -120,6 +123,13 @@ export function Landing() {
               <span className="mode-badge">START HERE</span>
               <h3>Reply</h3>
               <p>I don’t know what to say back.</p>
+              <ArrowRight className="mode-arrow" />
+            </Link>
+            <Link href="/check" className="mode-card featured">
+              <ShieldCheck />
+              <span className="mode-badge">BEFORE YOU SEND</span>
+              <h3>Check my reply</h3>
+              <p>Too bold? Get a tone check and a smoother rewrite.</p>
               <ArrowRight className="mode-arrow" />
             </Link>
             {[

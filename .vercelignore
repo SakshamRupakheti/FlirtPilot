@@ -1,0 +1,10 @@
+.env*
+!.env.example
+work/
+outputs/
+.sites-runtime/
+.wrangler/
+.agents/
+.codex/
+dist/
+ios/
